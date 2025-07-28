@@ -1,4 +1,4 @@
-import { getAuth } from "@/lib/auth";
+import { parseCookies } from "@/lib/parseCookies";
 import { NextRequest } from "next/server";
 
 const BASE_URL = "https://aquatrack-api.onrender.com/api/v1";
@@ -22,7 +22,9 @@ async function getFarmData(farmId: string, token: string) {
 }
 
 export async function buildDynamicPrompt(message: string, req: NextRequest) {
-  const { token, farmId } = await getAuth(req);
+  const cookies = parseCookies(req);
+  const token = cookies.token;
+  const farmId = cookies.farm_id;
 
   if (!token || !farmId) {
     return "You are a virtual aquaculture consultant with over 15 years of experience running profitable fish farms in Nigeria. You are an expert in catfish, tilapia, and other common species in Africa. You give simple, practical, farmer-friendly advice, avoiding complex science terms. Respond clearly in basic English, like you're talking to a local fish farmer. Be patient, supportive, and helpful.";
