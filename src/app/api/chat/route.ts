@@ -1,7 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
+import { buildDynamicPrompt } from "@/app/utils/prompt-builder";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const { message } = await req.json();
+  const systemPrompt = await buildDynamicPrompt(message, req);
 
   try {
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -15,8 +17,7 @@ export async function POST(req: Request) {
         messages: [
           {
             role: "system",
-            content:
-              "You are a virtual aquaculture consultant with over 15 years of experience running profitable fish farms in Nigeria. You are an expert in catfish, tilapia, and other common species in Africa. You give simple, practical, farmer-friendly advice, avoiding complex science terms. Respond clearly in basic English, like you're talking to a local fish farmer. Be patient, supportive, and helpful.",
+            content: systemPrompt,
           },
           {
             role: "user",
