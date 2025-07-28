@@ -26,32 +26,36 @@ export async function buildDynamicPrompt(message: string, req: NextRequest) {
   const token = cookies.token;
   const farmId = cookies.farm_id;
 
-  if (!token || !farmId) {
-    return "You are a virtual aquaculture consultant with over 15 years of experience running profitable fish farms in Nigeria. You are an expert in catfish, tilapia, and other common species in Africa. You give simple, practical, farmer-friendly advice, avoiding complex science terms. Respond clearly in basic English, like you're talking to a local fish farmer. Be patient, supportive, and helpful.";
-  }
+  const basePrompt =
+    "You are a professional aquaculture consultant with over 15 years of experience in fish farming, especially in Africa and Nigeria. You specialize in catfish and tilapia farming. You provide expert, practical, and data-informed advice in a clear and professional tone. Never use casual greetings like “hey buddy” or “hello friend”. Respond like a trusted advisor, using precise and respectful language. Assume the farmer has limited literacy — be simple, but never childish or overly casual.";
 
-  const lowerCaseMessage = message.toLowerCase();
+  if (!token || !farmId) {
+    return basePrompt;
+  }
 
   try {
-    if (KEYWORDS.BATCH_COUNT.some((keyword) => lowerCaseMessage.includes(keyword))) {
-      const farmData = await getFarmData(farmId, token);
-      const batchCount = farmData.data.total_batch;
-      return `The user is asking about the number of batches on their farm. You have access to the following data: the total number of batches is ${batchCount}. Based on this, provide a helpful and friendly response.`;
-    }
+    const farmData = await getFarmData(farmId, token);
+    const {
+      total_batch,
+      ponds,
+      total_stocked_fish,
+      total_feed_used,
+    } = farmData.data;
 
-    if (KEYWORDS.POND_STATUS.some((keyword) => lowerCaseMessage.includes(keyword))) {
-      const farmData = await getFarmData(farmId, token);
-      const pondStatus = farmData.data.ponds;
-      return `The user is asking about the status of their ponds. You have access to the following data: ${JSON.stringify(pondStatus)}. Based on this, provide a helpful and friendly response.`;
-    }
+    let dynamicPrompt = `${basePrompt}\n\nFarmer Data:\n`;
+    if (ponds) dynamicPrompt += `- Ponds: ${ponds.length}\n`;
+    if (total_batch) dynamicPrompt += `- Active Batches: ${total_batch}\n`;
+    if (total_stocked_fish)
+      dynamicPrompt += `- Total Fish Stocked: ${total_stocked_fish}\n`;
+    if (total_feed_used)
+      dynamicPrompt += `- Feed Used: ${total_feed_used}kg\n`;
 
-    if (KEYWORDS.FARM_SUMMARY.some((keyword) => lowerCaseMessage.includes(keyword))) {
-      const farmData = await getFarmData(farmId, token);
-      return `The user is asking for a summary of their farm. You have access to the following data: ${JSON.stringify(farmData.data)}. Based on this, provide a helpful and friendly summary of the farm's current state.`;
-    }
+    dynamicPrompt +=
+      "\nUse this data to answer the farmer's question accurately. If the data is not available, explain that clearly.";
+
+    return dynamicPrompt;
   } catch (error) {
     console.error("Error fetching farm data:", error);
+    return basePrompt;
   }
-
-  return "You are a virtual aquaculture consultant with over 15 years of experience running profitable fish farms in Nigeria. You are an expert in catfish, tilapia, and other common species in Africa. You give simple, practical, farmer-friendly advice, avoiding complex science terms. Respond clearly in basic English, like you're talking to a local fish farmer. Be patient, supportive, and helpful.";
 }
