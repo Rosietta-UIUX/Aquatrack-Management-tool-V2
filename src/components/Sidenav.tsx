@@ -36,13 +36,7 @@ export function Sidenav() {
                 ? `bg-[#0181ea15] font-semibold border-[--secondary] border-l-8`
                 : ``
             }`}>
-            <Image
-              src={data?.icon}
-              alt={data?.title}
-              layout="fixed"
-              width="20"
-              height="20"
-            />
+            <data.icon className="h-5 w-5" />
             <p>{data?.title}</p>
           </Link>
         ))}
