@@ -65,6 +65,17 @@ const ChatAssistant: React.FC = () => {
     }
   };
 
+  const suggestedQuestions = [
+    "How many batches do I have in my farm?",
+    "What is the status of my ponds?",
+    "Summarize my farm's current state.",
+    "How can I improve my feed conversion ratio?",
+  ];
+
+  const handleSuggestedQuestionClick = (question: string) => {
+    setInputValue(question);
+  };
+
   return (
     <div className="flex flex-col h-[80vh] w-11/12 mx-auto bg-white rounded-lg shadow-lg">
       <div className="p-4 border-b">
@@ -83,6 +94,22 @@ const ChatAssistant: React.FC = () => {
             </div>
           </div>
         </div>
+        {messages.length === 0 && (
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold mb-2">Suggested Questions:</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              {suggestedQuestions.map((question, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleSuggestedQuestionClick(question)}
+                  className="bg-gray-100 text-left hover:bg-gray-200 p-3 rounded-lg text-sm"
+                >
+                  {question}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
         {messages.map((message, index) => (
           <div
             key={index}
