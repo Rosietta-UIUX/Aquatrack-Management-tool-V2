@@ -6,6 +6,7 @@ import {
   Fish,
   Settings,
   Bot,
+  Calculator,
 } from "lucide-react";
 
 export const navs = [
@@ -73,5 +74,11 @@ export const links = [
     title: "AI Assistant",
     icon: Bot,
     link: "/account/assistant",
+  },
+  {
+    id: 8,
+    title: "FCR Calculator",
+    icon: Calculator,
+    link: "/account/fcr-calculator",
   },
 ];
