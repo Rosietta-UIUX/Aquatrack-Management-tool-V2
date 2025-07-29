@@ -20,12 +20,13 @@ const ChatAssistant: React.FC = () => {
     }
   }, [messages]);
 
-  const handleSendMessage = async () => {
-    if (inputValue.trim() === "") return;
+  const handleSendMessage = async (messageText?: string) => {
+    const text = messageText || inputValue;
+    if (text.trim() === "") return;
 
     const newMessages: Message[] = [
       ...messages,
-      { text: inputValue, isUser: true },
+      { text: text, isUser: true },
     ];
     setMessages(newMessages);
     setInputValue("");
@@ -66,14 +67,27 @@ const ChatAssistant: React.FC = () => {
   };
 
   const suggestedQuestions = [
-    "How many batches do I have in my farm?",
-    "What is the status of my ponds?",
-    "Summarize my farm's current state.",
-    "How can I improve my feed conversion ratio?",
+    "How can I improve my FCR?",
+    "What’s the best way to prevent fish disease?",
+    "How often should I feed my catfish?",
+    "What is the ideal water quality for fish farming?",
+    "Which feed is best for catfish in Nigeria?",
+    "What size of fingerlings should I stock?",
+    "How do I reduce fish mortality in my pond?",
+    "What are signs of a healthy vs sick fish?",
+    "How do I prepare my pond before stocking?",
+    "How do I know when my fish are ready for harvest?",
+    "Can I mix different feed types?",
+    "What stocking density should I use?",
+    "What should I do if my fish stop eating?",
+    "What’s the best pond size for 1000 catfish?",
+    "How do I manage fish farming during the dry season?",
+    "What’s a good profit margin per cycle?",
   ];
 
   const handleSuggestedQuestionClick = (question: string) => {
     setInputValue(question);
+    handleSendMessage(question);
   };
 
   return (
@@ -96,13 +110,15 @@ const ChatAssistant: React.FC = () => {
         </div>
         {messages.length === 0 && (
           <div className="mb-4">
-            <h3 className="text-lg font-semibold mb-2">Suggested Questions:</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <h3 className="text-lg font-semibold mb-2">
+              💬 Quick Questions You Can Ask
+            </h3>
+            <div className="flex overflow-x-auto space-x-2 pb-2">
               {suggestedQuestions.map((question, index) => (
                 <button
                   key={index}
                   onClick={() => handleSuggestedQuestionClick(question)}
-                  className="bg-gray-100 text-left hover:bg-gray-200 p-3 rounded-lg text-sm"
+                  className="bg-gray-100 text-left hover:bg-gray-200 p-3 rounded-lg text-sm flex-shrink-0"
                 >
                   {question}
                 </button>
@@ -146,7 +162,7 @@ const ChatAssistant: React.FC = () => {
           className="flex-1 p-2 border rounded-lg focus:outline-none"
         />
         <button
-          onClick={handleSendMessage}
+          onClick={() => handleSendMessage()}
           className="ml-4 bg-green-500 text-white p-3 rounded-full"
         >
           <FiSend />
