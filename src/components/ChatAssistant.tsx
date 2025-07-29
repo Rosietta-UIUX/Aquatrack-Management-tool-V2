@@ -162,7 +162,7 @@ const ChatAssistant: React.FC = () => {
           className="flex-1 p-2 border rounded-lg focus:outline-none"
         />
         <button
-          onClick={handleSendMessage}
+          onClick={() => handleSendMessage()}
           className="ml-4 bg-green-500 text-white p-3 rounded-full"
         >
           <FiSend />
