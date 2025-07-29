@@ -43,10 +43,11 @@ export function Sidenav() {
 
         <LogoutModal open={open} setOpen={setOpen} />
 
-        <ul className="flex-1 px-3">
-          {links.map((data) => (
-            <Link key={data.id} href={data.link}>
-              <li
+        <div className="flex-1 overflow-y-auto">
+          <ul className="px-3">
+            {links.map((data) => (
+              <Link key={data.id} href={data.link}>
+                <li
                 className={`
                 relative flex items-center py-2 px-3 my-1
                 font-medium rounded-md cursor-pointer
@@ -78,10 +79,11 @@ export function Sidenav() {
                     {data.title}
                   </div>
                 )}
-              </li>
-            </Link>
-          ))}
-        </ul>
+                </li>
+              </Link>
+            ))}
+          </ul>
+        </div>
 
         {active_subscription && (
           <div className="border-t flex p-3">
