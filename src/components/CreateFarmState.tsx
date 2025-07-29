@@ -1,8 +1,7 @@
 import { useState } from "react";
 import AddFarmModal from "./AddFarmModal";
-import Image from "next/image";
-import emptyImg from "@/public/empty.png";
 import { Button } from "@/components/ui/button";
+import { PlusCircle } from "lucide-react";
 
 const CreateFarmState = ({ vheight }: any) => {
   const [open, setOpen] = useState(false);
@@ -10,27 +9,27 @@ const CreateFarmState = ({ vheight }: any) => {
     <section
       className={`h-[${
         vheight ? vheight : `30vh`
-      }] flex items-center justify-center`}>
+      }] flex items-center justify-center`}
+    >
       <AddFarmModal open={open} setOpen={setOpen} />
-      <div className="relative lg:w-6/12 w-10/12 mx-auto">
-        <div className="text absolute top-14 w-full text-center">
-          <h2 className="font-bold lg:text-2xl text-xl mb-2">
-            Create farm to Get started
-          </h2>
-          <Button
-            onClick={() => setOpen(true)}
-            className=" mt-10 font-semibold bg-[--primary] hover:bg-blue-500 px-20 h-[53px] text-white">
-            Create farm
-          </Button>
+      <div className="text-center">
+        <div className="flex justify-center">
+          <PlusCircle className="text-gray-400" size={64} />
         </div>
-        <Image
-          src={emptyImg}
-          alt="empty"
-          height={300}
-          width={200}
-          layout="fixed"
-          className="mx-auto"
-        />
+        <h2 className="font-semibold text-2xl mt-4">
+          Create a farm to get started
+        </h2>
+        <p className="text-gray-500 mt-1">
+          You don't have any farms yet. Create one to start managing your
+          aquaculture business.
+        </p>
+        <Button
+          onClick={() => setOpen(true)}
+          className="mt-6 bg-blue-500 hover:bg-blue-600 text-white"
+        >
+          <PlusCircle className="mr-2" size={20} />
+          Create Farm
+        </Button>
       </div>
     </section>
   );

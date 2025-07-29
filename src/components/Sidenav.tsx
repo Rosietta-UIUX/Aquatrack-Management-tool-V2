@@ -7,8 +7,7 @@ import { Button } from "./ui/button";
 import { links } from "@/contants";
 import LogoutModal from "./LogoutModal";
 import { useState } from "react";
-import logoutImg from "@/public/logout.png";
-import { FaCloudArrowDown } from "react-icons/fa6";
+import { ChevronFirst, ChevronLast } from "lucide-react";
 import SubscriptionModal from "./SubscriptionModal";
 import useCheckSubscriptionStatus from "@/hooks/useSubscriptionStatus";
 
@@ -16,58 +15,100 @@ export function Sidenav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [openSub, setOpenSub] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const { active_subscription } = useCheckSubscriptionStatus();
 
   return (
-    <div
-      className={`h-screen overflow-y-auto lg:w-[18rem] bg-white  shadow-sm transform translate-x-[-100%] lg:translate-x-0 lg:relative absolute left-0 transition ease-in-out duration-100`}>
-      <div className="p-6">
-        <Image src={Logo} width="140" alt="Logo" className="" />
-      </div>
-      <LogoutModal open={open} setOpen={setOpen} />
+    <aside className="h-screen hidden lg:block">
+      <nav className="h-full flex flex-col bg-white border-r shadow-sm">
+        <div
+          className={`p-4 pb-2 flex justify-between items-center ${
+            expanded ? "flex-row" : "flex-col"
+          }`}
+        >
+          <Image
+            src={Logo}
+            alt="Logo"
+            className={`overflow-hidden transition-all ${
+              expanded ? "w-32" : "w-0"
+            }`}
+          />
+          <button
+            onClick={() => setExpanded((curr) => !curr)}
+            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
+          >
+            {expanded ? <ChevronFirst /> : <ChevronLast />}
+          </button>
+        </div>
 
-      <nav className="mt-2 space-y-1 pb-10">
-        {links?.map((data) => (
-          <Link
-            key={data?.id}
-            href={data?.link}
-            className={`flex text-base items-center hover:font-semibold space-x-2 text-[--secondary] hover:bg-[#0181ea15] py-3 pl-4 transition-all ${
-              pathname === data?.link
-                ? `bg-[#0181ea15] font-semibold border-[--secondary] border-l-8`
-                : ``
-            }`}>
-            <data.icon className="h-5 w-5" />
-            <p>{data?.title}</p>
-          </Link>
-        ))}
+        <LogoutModal open={open} setOpen={setOpen} />
+
+        <ul className="flex-1 px-3">
+          {links.map((data) => (
+            <Link key={data.id} href={data.link}>
+              <li
+                className={`
+                relative flex items-center py-2 px-3 my-1
+                font-medium rounded-md cursor-pointer
+                transition-colors group
+                ${
+                  pathname === data.link
+                    ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800"
+                    : "hover:bg-indigo-50 text-gray-600"
+                }
+              `}
+              >
+                <data.icon className="w-5 h-5" />
+                <span
+                  className={`overflow-hidden transition-all ${
+                    expanded ? "w-40 ml-3" : "w-0"
+                  }`}
+                >
+                  {data.title}
+                </span>
+                {!expanded && (
+                  <div
+                    className={`
+                    absolute left-full rounded-md px-2 py-1 ml-6
+                    bg-indigo-100 text-indigo-800 text-sm
+                    invisible opacity-20 -translate-x-3 transition-all
+                    group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
+                `}
+                  >
+                    {data.title}
+                  </div>
+                )}
+              </li>
+            </Link>
+          ))}
+        </ul>
+
         {active_subscription && (
-          <div
-            className={` ${
-              active_subscription ? "flex" : "hidden"
-            } px-4 pt-10`}>
+          <div className="border-t flex p-3">
             <SubscriptionModal open={openSub} setOpen={setOpenSub} />
-            <div className="subscription space-y-2 bg-[--primary] py-3 px-4 rounded-lg text-white relative ">
-              <Image
-                src={logoutImg}
-                alt="log out"
-                width={80}
-                height={80}
-                layout="fixed"
-                className="mx-auto absolute top-[-2.5rem] right-0"
-              />
-              <h2 className="font-bold text-lg">GO PRO</h2>
-              <p className="text-sm font-normal">
-                Gain access to all our premuim features
-              </p>
+            <div
+              className={`
+              flex justify-between items-center
+              overflow-hidden transition-all ${expanded ? "w-40 ml-3" : "w-0"}
+          `}
+            >
+              <div className="leading-4">
+                <h4 className="font-semibold">GO PRO</h4>
+                <span className="text-xs text-gray-600">
+                  Upgrade to access all features
+                </span>
+              </div>
               <Button
                 onClick={() => setOpenSub(true)}
-                className="w-full text-[--primary] font-semibold px-4 py-4 bg-white hover:bg-blue-200 flex items-center text-sm">
-                Upgrade <FaCloudArrowDown className="ml-2 h-5 w-5" />
+                className="bg-indigo-500 text-white"
+                size="sm"
+              >
+                Upgrade
               </Button>
             </div>
           </div>
         )}
       </nav>
-    </div>
+    </aside>
   );
 }
