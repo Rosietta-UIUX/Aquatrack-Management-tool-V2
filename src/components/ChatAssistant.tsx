@@ -91,20 +91,15 @@ const ChatAssistant: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-[80vh] w-11/12 mx-auto bg-white rounded-lg shadow-lg">
+    <div className="flex flex-col h-[80vh] w-11/12 mx-auto bg-white rounded-2xl shadow-lg">
       <div className="p-4 border-b">
-        <h2 className="text-xl font-semibold">AI Chat Assistant</h2>
+        <h2 className="text-2xl font-semibold">AI Chat Assistant</h2>
       </div>
-      <div
-        ref={chatContainerRef}
-        className="flex-1 p-4 overflow-y-auto"
-      >
+      <div ref={chatContainerRef} className="flex-1 p-4 overflow-y-auto">
         <div className="mb-4">
           <div className="flex items-start">
-            <div className="bg-gray-200 rounded-lg p-3">
-              <p className="text-sm">
-                👋 Ask me anything about your fish farm!
-              </p>
+            <div className="bg-gray-100 rounded-lg p-3">
+              <p>👋 Ask me anything about your fish farm!</p>
             </div>
           </div>
         </div>
@@ -113,12 +108,12 @@ const ChatAssistant: React.FC = () => {
             <h3 className="text-lg font-semibold mb-2">
               💬 Quick Questions You Can Ask
             </h3>
-            <div className="flex overflow-x-auto space-x-2 pb-2">
+            <div className="flex flex-wrap gap-2">
               {suggestedQuestions.map((question, index) => (
                 <button
                   key={index}
                   onClick={() => handleSuggestedQuestionClick(question)}
-                  className="bg-gray-100 text-left hover:bg-gray-200 p-3 rounded-lg text-sm flex-shrink-0"
+                  className="bg-gray-100 hover:bg-gray-200 p-2 rounded-full text-sm"
                 >
                   {question}
                 </button>
@@ -136,18 +131,18 @@ const ChatAssistant: React.FC = () => {
             <div
               className={`${
                 message.isUser
-                  ? "bg-green-500 text-white"
+                  ? "bg-blue-500 text-white"
                   : "bg-gray-200"
               } rounded-lg p-3 max-w-lg`}
             >
-              <p className="text-sm">{message.text}</p>
+              <p>{message.text}</p>
             </div>
           </div>
         ))}
         {isLoading && (
           <div className="flex items-start">
             <div className="bg-gray-200 rounded-lg p-3">
-              <p className="text-sm">The expert is typing...</p>
+              <p>The expert is typing...</p>
             </div>
           </div>
         )}
@@ -159,11 +154,11 @@ const ChatAssistant: React.FC = () => {
           onChange={(e) => setInputValue(e.target.value)}
           onKeyPress={handleKeyPress}
           placeholder="Type your message..."
-          className="flex-1 p-2 border rounded-lg focus:outline-none"
+          className="flex-1 p-2 border rounded-full focus:outline-none"
         />
         <button
           onClick={() => handleSendMessage()}
-          className="ml-4 bg-green-500 text-white p-3 rounded-full"
+          className="ml-4 bg-blue-500 text-white p-3 rounded-full"
         >
           <FiSend />
         </button>

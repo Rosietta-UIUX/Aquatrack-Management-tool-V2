@@ -1,12 +1,12 @@
-import { LinkItem } from "@/types";
-import dashboardIcon from "@/public/icons/dashboard.png";
-import pondsIcon from "@/public/icons/ponds.png";
-import batchIcon from "@/public/icons/batch.png";
-import harvestIcon from "@/public/icons/harvest.png";
-import inventoryIcon from "@/public/icons/inventory.png";
-import settingsIcon from "@/public/icons/settings.png";
-import { FaRobot } from "react-icons/fa6";
-import Image from "next/image";
+import {
+  LayoutDashboard,
+  Boxes,
+  Droplets,
+  Warehouse,
+  Carrot,
+  Settings,
+  Bot,
+} from "lucide-react";
 
 export const navs = [
   {
@@ -31,53 +31,47 @@ export const navs = [
   },
 ];
 
-export const links: any[] = [
+export const links = [
   {
     id: 1,
     title: "Dashboard",
-    icon: () => <Image src={dashboardIcon} alt="Dashboard" width="20" height="20" />,
+    icon: LayoutDashboard,
     link: "/account",
   },
   {
     id: 2,
     title: "Batch",
-    icon: () => <Image src={batchIcon} alt="Batch" width="20" height="20" />,
+    icon: Boxes,
     link: "/account/batch",
   },
   {
     id: 3,
     title: "Ponds",
-    icon: () => <Image src={pondsIcon} alt="Ponds" width="20" height="20" />,
+    icon: Droplets,
     link: "/account/ponds",
   },
   {
     id: 4,
     title: "Inventory",
-    icon: () => <Image src={inventoryIcon} alt="Inventory" width="20" height="20" />,
+    icon: Warehouse,
     link: "/account/inventory",
   },
   {
     id: 5,
     title: "Harvest",
-    icon: () => <Image src={harvestIcon} alt="Harvest" width="20" height="20" />,
+    icon: Carrot,
     link: "/account/harvest",
   },
   {
     id: 6,
     title: "Settings",
-    icon: () => <Image src={settingsIcon} alt="Settings" width="20" height="20" />,
+    icon: Settings,
     link: "/account/settings",
   },
   {
     id: 7,
     title: "AI Assistant",
-    icon: FaRobot,
+    icon: Bot,
     link: "/account/assistant",
   },
-  // {
-  //   id: 6,
-  //   title: "Support",
-  //   icon: settingsIcon,
-  //   link: "/account/support",
-  // },
 ];

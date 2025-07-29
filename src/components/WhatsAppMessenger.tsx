@@ -7,7 +7,7 @@ const WhatsAppMessenger = () => {
     <Link
       href="https://wa.me/message/KCIRDJO4JKVCI1"
       target="_blank"
-      className="fixed z-50 bottom-8 right-8 bg-white shadow-xl border flex items-center justify-center h-20 w-20 rounded-xl p-2">
+      className="fixed z-50 bottom-8 right-8 bg-white shadow-xl border flex items-center justify-center h-16 w-16 rounded-full p-2">
       <Image src={whatsAppImg} alt="WhatsApp Image" />
     </Link>
   );
