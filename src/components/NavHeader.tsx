@@ -11,6 +11,7 @@ import { links } from "@/contants";
 import { IoIosMenu, IoMdClose } from "react-icons/io";
 import { Dialog } from "@headlessui/react";
 import logoImg from "@/public/logo.png";
+import { LogOut } from "lucide-react";
 import Link from "next/link";
 import AddFarmModal from "./AddFarmModal";
 import { DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
@@ -183,14 +184,8 @@ const NavHeader = () => {
                       <Button
                         onClick={() => setOpenLog(true)}
                         variant="ghost"
-                        className="flex w-full items-center justify-between font-bold space-x-2 text-red-500 hover:text-red-500 focus:bg-[#ea1c0115] focus:text-red-500  rounded-xl transition-all">
-                        <Image
-                          src={logoutIcon}
-                          alt="Logout"
-                          layout="fixed"
-                          width="20"
-                          height="20"
-                        />
+                        className="flex w-full items-center justify-start font-bold space-x-2 text-red-500 hover:bg-red-100 hover:text-red-500 py-3 pl-4 rounded-md transition-all">
+                        <LogOut className="h-6 w-6" />
                         <p>Log Out</p>
                       </Button>
                     </label>
@@ -239,27 +234,15 @@ const NavHeader = () => {
                         ? `bg-[#0181ea15] font-semibold border-[--primary] border-l-8`
                         : ``
                     }`}>
-                    <Image
-                      src={data?.icon}
-                      alt={data?.title}
-                      layout="fixed"
-                      width="25"
-                      height="25"
-                    />
+                    <data.icon className="h-6 w-6" />
                     <p>{data?.title}</p>
                   </Link>
                 ))}
                 <Button
                   onClick={() => setOpenLog(true)}
                   variant="ghost"
-                  className="flex w-full items-center justify-start font-bold space-x-2 text-red-500 hover:bg-[#ea1c0115] hover:text-red-500 py-8 pl-4  rounded-xl transition-all">
-                  <Image
-                    src={logoutIcon}
-                    alt="Logout"
-                    layout="fixed"
-                    width="25"
-                    height="25"
-                  />
+                  className="flex w-full items-center justify-start font-bold space-x-2 text-red-500 hover:bg-red-100 hover:text-red-500 py-3 pl-4 rounded-md transition-all">
+                  <LogOut className="h-6 w-6" />
                   <p>Log Out</p>
                 </Button>
               </nav>
