@@ -61,7 +61,7 @@ export function Sidenav() {
                 <data.icon className="w-5 h-5" />
                 <span
                   className={`overflow-hidden transition-all ${
-                    expanded ? "w-48 ml-3" : "w-0"
+                    expanded ? "w-40 ml-3" : "w-0"
                   }`}
                 >
                   {data.title}
@@ -89,7 +89,7 @@ export function Sidenav() {
             <div
               className={`
               flex justify-between items-center
-              overflow-hidden transition-all ${expanded ? "w-48 ml-3" : "w-0"}
+              overflow-hidden transition-all ${expanded ? "w-40 ml-3" : "w-0"}
           `}
             >
               <div className="leading-4">

@@ -38,7 +38,7 @@ const ChatAssistant: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: inputValue }),
+        body: JSON.stringify({ message: text }),
       });
 
       if (!response.ok) {
@@ -109,7 +109,7 @@ const ChatAssistant: React.FC = () => {
               💬 Quick Questions You Can Ask
             </h3>
             <div className="flex flex-wrap gap-2">
-              {suggestedQuestions.map((question, index) => (
+              {suggestedQuestions.slice(0, 6).map((question, index) => (
                 <button
                   key={index}
                   onClick={() => handleSuggestedQuestionClick(question)}
