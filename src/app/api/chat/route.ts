@@ -2,8 +2,13 @@ import { NextResponse, NextRequest } from "next/server";
 import { buildDynamicPrompt } from "@/app/utils/prompt-builder";
 
 export async function POST(req: NextRequest) {
-  const { message } = await req.json();
-  const systemPrompt = await buildDynamicPrompt(message, req);
+  const { messages } = await req.json();
+  const systemPrompt = await buildDynamicPrompt("", req);
+
+  const formattedMessages = messages.map((message: any) => ({
+    role: message.isUser ? "user" : "assistant",
+    content: message.text,
+  }));
 
   try {
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -19,10 +24,7 @@ export async function POST(req: NextRequest) {
             role: "system",
             content: systemPrompt,
           },
-          {
-            role: "user",
-            content: message,
-          },
+          ...formattedMessages,
         ],
       }),
     });

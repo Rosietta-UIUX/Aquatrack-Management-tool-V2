@@ -38,7 +38,7 @@ const ChatAssistant: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({ messages: newMessages }),
       });
 
       if (!response.ok) {
