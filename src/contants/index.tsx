@@ -3,7 +3,7 @@ import {
   Boxes,
   Droplets,
   Warehouse,
-  Carrot,
+  Fish,
   Settings,
   Bot,
 } from "lucide-react";
@@ -59,7 +59,7 @@ export const links = [
   {
     id: 5,
     title: "Harvest",
-    icon: Carrot,
+    icon: Fish,
     link: "/account/harvest",
   },
   {
