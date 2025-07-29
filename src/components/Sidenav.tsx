@@ -19,7 +19,7 @@ export function Sidenav() {
   const { active_subscription } = useCheckSubscriptionStatus();
 
   return (
-    <aside className="h-screen">
+    <aside className="h-screen hidden lg:block">
       <nav className="h-full flex flex-col bg-white border-r shadow-sm">
         <div
           className={`p-4 pb-2 flex justify-between items-center ${
@@ -61,7 +61,7 @@ export function Sidenav() {
                 <data.icon className="w-5 h-5" />
                 <span
                   className={`overflow-hidden transition-all ${
-                    expanded ? "w-52 ml-3" : "w-0"
+                    expanded ? "w-48 ml-3" : "w-0"
                   }`}
                 >
                   {data.title}
@@ -89,7 +89,7 @@ export function Sidenav() {
             <div
               className={`
               flex justify-between items-center
-              overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"}
+              overflow-hidden transition-all ${expanded ? "w-48 ml-3" : "w-0"}
           `}
             >
               <div className="leading-4">
