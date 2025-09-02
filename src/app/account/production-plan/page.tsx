@@ -64,7 +64,7 @@ const PlanResult = ({ plan }: { plan: any }) => {
       "data:text/csv;charset=utf-8," +
       headers.join(",") +
       "\n" +
-      rows.map((e) => e.join(",")).join("\n");
+      rows.map((e: (string | number)[]) => e.join(",")).join("\n");
 
     const link = document.createElement("a");
     link.setAttribute("href", encodeURI(csvContent));
