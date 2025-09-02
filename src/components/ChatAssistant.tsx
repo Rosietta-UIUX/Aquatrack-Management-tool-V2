@@ -51,6 +51,7 @@ const ChatAssistant: React.FC = () => {
         { text: data.response, isUser: false },
       ]);
     } catch (error) {
+      console.error("Error sending message:", error);
       setMessages((prevMessages) => [
         ...prevMessages,
         { text: "Sorry, I didn’t catch that. Try again.", isUser: false },

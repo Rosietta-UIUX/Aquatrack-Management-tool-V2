@@ -3,7 +3,8 @@ import { buildDynamicPrompt } from "@/app/utils/prompt-builder";
 
 export async function POST(req: NextRequest) {
   const { messages } = await req.json();
-  const systemPrompt = await buildDynamicPrompt("", req);
+  const lastMessage = messages[messages.length - 1];
+  const systemPrompt = await buildDynamicPrompt(lastMessage.text, req);
 
   const formattedMessages = messages.map((message: any) => ({
     role: message.isUser ? "user" : "assistant",
