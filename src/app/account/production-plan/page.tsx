@@ -27,7 +27,7 @@ import {
   Bar,
 } from "recharts";
 import { useGetAllBatchsDataQuery } from "@/redux/services/batchApiSlice";
-import { useDefaultFarmId } from "@/hooks/useDefaultFarmId";
+import useDefaultFarmId from "@/hooks/useDefaultFarmId";
 import {
   Select,
   SelectContent,
@@ -164,7 +164,7 @@ const ProductionPlanPage = () => {
   const [cultureDuration, setCultureDuration] = useState(24);
   const [survivalRate, setSurvivalRate] = useState(90);
   const [plan, setPlan] = useState<any>(null);
-  const farmId = useDefaultFarmId();
+  const { defaultFarmId: farmId } = useDefaultFarmId();
   const { data: batches } = useGetAllBatchsDataQuery({ farmId });
   const [selectedBatch, setSelectedBatch] = useState<string | null>(null);
   const [batchPlan, setBatchPlan] = useState<any>(null);
