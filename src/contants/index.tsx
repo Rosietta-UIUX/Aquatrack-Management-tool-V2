@@ -7,6 +7,7 @@ import {
   Settings,
   Bot,
   Calculator,
+  TrendingUp,
 } from "lucide-react";
 
 export const navs = [
@@ -80,5 +81,11 @@ export const links = [
     title: "FCR Calculator",
     icon: Calculator,
     link: "/account/fcr-calculator",
+  },
+  {
+    id: 9,
+    title: "Production Plan",
+    icon: TrendingUp,
+    link: "/account/production-plan",
   },
 ];

@@ -3,7 +3,8 @@ import { buildDynamicPrompt } from "@/app/utils/prompt-builder";
 
 export async function POST(req: NextRequest) {
   const { messages } = await req.json();
-  const systemPrompt = await buildDynamicPrompt("", req);
+  const lastMessage = messages[messages.length - 1];
+  const systemPrompt = await buildDynamicPrompt(lastMessage.text, req);
 
   const formattedMessages = messages.map((message: any) => ({
     role: message.isUser ? "user" : "assistant",
@@ -18,7 +19,7 @@ export async function POST(req: NextRequest) {
         Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "llama3-8b-8192",
+        model: "llama-3.1-8b-instant",
         messages: [
           {
             role: "system",
@@ -30,14 +31,21 @@ export async function POST(req: NextRequest) {
     });
 
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      const errorText = await response.text();
+      throw new Error(`Failed to fetch from Groq API: ${response.status} ${errorText}`);
     }
 
     const data = await response.json();
+
+    if (!data.choices || data.choices.length === 0 || !data.choices[0].message) {
+      throw new Error("Invalid response structure from Groq API");
+    }
+
     return NextResponse.json({ response: data.choices[0].message.content });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { error: "Failed to fetch response from Groq API" },
+      { error: (error as Error).message || "An unknown error occurred." },
       { status: 500 }
     );
   }
