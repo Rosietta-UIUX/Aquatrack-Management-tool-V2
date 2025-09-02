@@ -31,10 +31,16 @@ export async function POST(req: NextRequest) {
     });
 
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      const errorText = await response.text();
+      throw new Error(`Failed to fetch from Groq API: ${response.status} ${errorText}`);
     }
 
     const data = await response.json();
+
+    if (!data.choices || data.choices.length === 0 || !data.choices[0].message) {
+      throw new Error("Invalid response structure from Groq API");
+    }
+
     return NextResponse.json({ response: data.choices[0].message.content });
   } catch (error) {
     console.error(error);

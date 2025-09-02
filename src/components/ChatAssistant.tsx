@@ -42,12 +42,12 @@ const ChatAssistant: React.FC = () => {
       });
 
       if (!response.ok) {
-        let errorMessage = "Network response was not ok";
+        let errorMessage = `Error: ${response.status} - ${response.statusText}`;
         try {
           const errorData = await response.json();
           errorMessage = errorData.error || errorMessage;
         } catch (e) {
-          // The response was not JSON, so we can't get a specific error message.
+          // Response was not JSON, just use the status text.
         }
         throw new Error(errorMessage);
       }
