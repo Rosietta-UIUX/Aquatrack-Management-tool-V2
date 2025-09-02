@@ -37,8 +37,9 @@ export async function POST(req: NextRequest) {
     const data = await response.json();
     return NextResponse.json({ response: data.choices[0].message.content });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { error: "Failed to fetch response from Groq API" },
+      { error: (error as Error).message || "An unknown error occurred." },
       { status: 500 }
     );
   }

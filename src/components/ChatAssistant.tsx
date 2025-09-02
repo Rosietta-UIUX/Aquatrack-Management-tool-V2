@@ -42,7 +42,8 @@ const ChatAssistant: React.FC = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Network response was not ok");
       }
 
       const data = await response.json();
@@ -54,7 +55,7 @@ const ChatAssistant: React.FC = () => {
       console.error("Error sending message:", error);
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: "Sorry, I didn’t catch that. Try again.", isUser: false },
+        { text: (error as Error).message, isUser: false },
       ]);
     } finally {
       setIsLoading(false);
