@@ -168,43 +168,6 @@ const ProductionPlanPage = () => {
   const { data: batches } = useGetAllBatchsDataQuery({ farmId });
   const [selectedBatch, setSelectedBatch] = useState<string | null>(null);
   const [batchPlan, setBatchPlan] = useState<any>(null);
-  const [messages, setMessages] = useState<{ isUser: boolean; text: string }[]>(
-    []
-  );
-  const [input, setInput] = useState("");
-
-  const handleSendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-
-    const newMessages = [...messages, { isUser: true, text: input }];
-    setMessages(newMessages);
-    setInput("");
-
-    const context = plan
-      ? `Here is the current production plan: ${JSON.stringify(
-          plan
-        )}.`
-      : "";
-
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      body: JSON.stringify({
-        messages: newMessages,
-        context: plan
-          ? `Here is the current production plan: ${JSON.stringify(
-              plan
-            )}.`
-          : "",
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await res.json();
-    setMessages([...newMessages, { isUser: false, text: data.response }]);
-  };
 
   const handleGeneratePlan = (e: React.FormEvent) => {
     e.preventDefault();
@@ -221,7 +184,6 @@ const ProductionPlanPage = () => {
         <TabsList>
           <TabsTrigger value="new-plan">New Plan</TabsTrigger>
           <TabsTrigger value="existing-batch">Use Existing Batch</TabsTrigger>
-          <TabsTrigger value="ai-assistant">AI Assistant</TabsTrigger>
         </TabsList>
         <TabsContent value="new-plan" className="space-y-4">
           <Card>
@@ -379,47 +341,6 @@ const ProductionPlanPage = () => {
                 </Button>
               </div>
               <PlanResult plan={batchPlan} />
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="ai-assistant" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>AI Assistant</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="h-64 overflow-y-auto border p-4 rounded-md">
-                  {messages.map((msg, index) => (
-                    <div
-                      key={index}
-                      className={`flex ${
-                        msg.isUser ? "justify-end" : "justify-start"
-                      }`}
-                    >
-                      <div
-                        className={`p-2 rounded-lg ${
-                          msg.isUser
-                            ? "bg-blue-500 text-white"
-                            : "bg-gray-200"
-                        }`}
-                      >
-                        {msg.text}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <form onSubmit={handleSendMessage} className="flex space-x-2">
-                  <Input
-                    type="text"
-                    placeholder="Ask a question..."
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    className="flex-1"
-                  />
-                  <Button type="submit">Send</Button>
-                </form>
-              </div>
             </CardContent>
           </Card>
         </TabsContent>
