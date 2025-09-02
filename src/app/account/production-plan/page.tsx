@@ -27,7 +27,7 @@ import {
   Bar,
 } from "recharts";
 import { useGetAllBatchsDataQuery } from "@/redux/services/batchApiSlice";
-import { useDefaultFarmId }s from "@/hooks/useDefaultFarmId";
+import { useDefaultFarmId } from "@/hooks/useDefaultFarmId";
 import {
   Select,
   SelectContent,
