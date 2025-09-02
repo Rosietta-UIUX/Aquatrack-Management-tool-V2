@@ -42,8 +42,14 @@ const ChatAssistant: React.FC = () => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Network response was not ok");
+        let errorMessage = "Network response was not ok";
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch (e) {
+          // The response was not JSON, so we can't get a specific error message.
+        }
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();

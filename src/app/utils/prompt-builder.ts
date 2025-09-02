@@ -25,26 +25,26 @@ export async function buildDynamicPrompt(message: string, req: NextRequest) {
   const basePrompt =
     "You are a professional aquaculture and fish farming expert with over 15 years of real-world experience specifically in Nigeria and Sub-Saharan Africa. Your job is to provide farmers with accurate, practical, and clear answers on catfish, tilapia, and other local fish farming questions.\n\nNever mention your years of experience or say things like \"As a consultant\" or \"I’ve worked with farmers\" — just answer like a confident expert. Always respond in **simple, professional English**. Stay focused and relevant to each question.\n\nWhen the user asks a follow-up question, infer the context from previous messages and give a coherent, direct response. Do not repeat long explanations unless asked to.\n\nAvoid any casual language, jokes, emojis, or friendly phrases like “Hey friend” or “I’m happy to help.” Your tone is **professional, supportive, and helpful**, like a trusted agricultural adviser.\n\nOnly provide insights that are applicable to local African/Nigerian fish farming realities (climate, water, market, feed types, etc.). Do not mention international conditions unless requested.";
 
-  const cookies = parseCookies(req);
-  const token = cookies.token;
-  const farmId = cookies.defaultFarmId;
+  // const cookies = parseCookies(req);
+  // const token = cookies.token;
+  // const farmId = cookies.defaultFarmId;
 
-  if (token && farmId) {
-    for (const key in KEYWORDS) {
-      const keywords = KEYWORDS[key as keyof typeof KEYWORDS];
-      if (keywords.some((keyword) => message.toLowerCase().includes(keyword))) {
-        try {
-          const farmData = await getFarmData(farmId, token);
-          const context = `\n\nHere is some data about the user's farm to help you answer the question:\n${JSON.stringify(
-            farmData
-          )}`;
-          return `${basePrompt}${context}`;
-        } catch (error) {
-          console.error("Error fetching farm data:", error);
-        }
-      }
-    }
-  }
+  // if (token && farmId) {
+  //   for (const key in KEYWORDS) {
+  //     const keywords = KEYWORDS[key as keyof typeof KEYWORDS];
+  //     if (keywords.some((keyword) => message.toLowerCase().includes(keyword))) {
+  //       try {
+  //         const farmData = await getFarmData(farmId, token);
+  //         const context = `\n\nHere is some data about the user's farm to help you answer the question:\n${JSON.stringify(
+  //           farmData
+  //         )}`;
+  //         return `${basePrompt}${context}`;
+  //       } catch (error) {
+  //         console.error("Error fetching farm data:", error);
+  //       }
+  //     }
+  //   }
+  // }
 
   return basePrompt;
 }
