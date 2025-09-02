@@ -2,8 +2,8 @@ import { NextResponse, NextRequest } from "next/server";
 import { buildDynamicPrompt } from "@/app/utils/prompt-builder";
 
 export async function POST(req: NextRequest) {
-  const { messages } = await req.json();
-  const systemPrompt = await buildDynamicPrompt("", req);
+  const { messages, context } = await req.json();
+  const systemPrompt = await buildDynamicPrompt(context || "", req);
 
   const formattedMessages = messages.map((message: any) => ({
     role: message.isUser ? "user" : "assistant",
