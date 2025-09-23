@@ -4,7 +4,7 @@ import {
   useAddMortalityLogMutation,
   useEditMortalityLogMutation,
 } from "@/redux/services/pondsApiSlice";
-import Modal from "./Modal";
+import { Modal } from "./Modal";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 

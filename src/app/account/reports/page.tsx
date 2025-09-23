@@ -8,7 +8,7 @@ import {
   useGetDailyReportQuery,
 } from "@/redux/services/pondsApiSlice";
 import useDefaultFarmId from "@/hooks/useDefaultFarmId";
-import { DataTable } from "@/components/ui/table";
+import { DataTable } from "@/components/ui/data-table";
 import { Input } from "@/components/ui/input";
 import AddMortalityLogModal from "@/components/AddMortalityLogModal";
 import Papa from "papaparse";
