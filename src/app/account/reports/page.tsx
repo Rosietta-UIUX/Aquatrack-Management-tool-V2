@@ -13,6 +13,12 @@ import { Input } from "@/components/ui/input";
 import AddMortalityLogModal from "@/components/AddMortalityLogModal";
 import Papa from "papaparse";
 
+interface LogData {
+  id: string;
+  pond_id: string;
+  log: string;
+}
+
 const ReportsPage = () => {
   const [activeTab, setActiveTab] = useState("history");
   const { defaultFarmId } = useDefaultFarmId();
@@ -38,7 +44,7 @@ const ReportsPage = () => {
   const [deleteMortalityLog] = useDeleteMortalityLogMutation();
 
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [editLogData, setEditLogData] = useState(null);
+  const [editLogData, setEditLogData] = useState<LogData | null>(null);
 
   const handleDelete = async (log: any) => {
     if (window.confirm("Are you sure you want to delete this log?")) {
