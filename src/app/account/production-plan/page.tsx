@@ -158,7 +158,7 @@ const PlanResult = ({ plan }: { plan: any }) => {
   );
 };
 
-export const ProductionPlan = () => {
+const ProductionPlanPage = () => {
   const [numFishes, setNumFishes] = useState(1000);
   const [avgWeight, setAvgWeight] = useState(10);
   const [cultureDuration, setCultureDuration] = useState(24);
@@ -348,3 +348,5 @@ export const ProductionPlan = () => {
     </div>
   );
 };
+
+export default ProductionPlanPage;
