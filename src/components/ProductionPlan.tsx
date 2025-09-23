@@ -5,8 +5,6 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -158,7 +156,7 @@ const PlanResult = ({ plan }: { plan: any }) => {
   );
 };
 
-const ProductionPlanPage = () => {
+const ProductionPlan = () => {
   const [numFishes, setNumFishes] = useState(1000);
   const [avgWeight, setAvgWeight] = useState(10);
   const [cultureDuration, setCultureDuration] = useState(24);
@@ -176,9 +174,8 @@ const ProductionPlanPage = () => {
   };
 
   return (
-    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+    <div className="flex-1 space-y-4 pt-6">
       <div className="flex items-center justify-between space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">Production Plan</h2>
       </div>
       <Tabs defaultValue="new-plan" className="space-y-4">
         <TabsList>
@@ -349,4 +346,4 @@ const ProductionPlanPage = () => {
   );
 };
 
-export default ProductionPlanPage;
+export default ProductionPlan;
