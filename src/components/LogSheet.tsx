@@ -98,7 +98,9 @@ const LogSheet = () => {
                 />
               </CardContent>
               <CardFooter>
-                <Button type="submit" className="w-full bg-primary text-primary-foreground" variant="default">Log Expense</Button>
+                <Button type="submit" className="w-full btn-primary">
+                  Log Expense
+                </Button>
               </CardFooter>
             </form>
           </Card>

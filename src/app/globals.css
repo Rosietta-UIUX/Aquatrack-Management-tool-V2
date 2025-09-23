@@ -108,6 +108,11 @@
     background-size: cover;
 }
 
+.btn-primary {
+  background-color: #02579E !important;
+  color: white !important;
+}
+
 
 
 

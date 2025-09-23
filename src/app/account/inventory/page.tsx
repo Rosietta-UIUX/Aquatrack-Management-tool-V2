@@ -100,7 +100,7 @@ const InventoryPage = () => {
                       </section>
                     )}
                   </TabsContent>
-                  <TabsContent value="expenses">
+                  <TabsContent value="expenses" className="pt-8">
                     {defaultFarmId ? (
                       <ExpensesRecord farmId={defaultFarmId} />
                     ) : (
@@ -126,7 +126,7 @@ const InventoryPage = () => {
                       </section>
                     )}
                   </TabsContent>
-                  <TabsContent value="employees">
+                  <TabsContent value="employees" className="pt-8">
                     {defaultFarmId ? (
                       <EmployeeRecord
                         farmId={data?.data?.organizations[0]?.farms[0].id}
@@ -152,7 +152,7 @@ const InventoryPage = () => {
                       </section>
                     )}
                   </TabsContent>
-                  <TabsContent value="customers">
+                  <TabsContent value="customers" className="pt-8">
                     {defaultFarmId ? (
                       <CustomerRecord farmId={defaultFarmId} />
                     ) : (
@@ -176,7 +176,7 @@ const InventoryPage = () => {
                       </section>
                     )}
                   </TabsContent>
-                  <TabsContent value="log-sheet">
+                  <TabsContent value="log-sheet" className="pt-8">
                     {defaultFarmId ? (
                       <LogSheet />
                     ) : (
