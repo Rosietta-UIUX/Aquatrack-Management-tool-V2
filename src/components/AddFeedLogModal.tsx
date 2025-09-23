@@ -1,15 +1,15 @@
 "use client";
 import { useState, useEffect } from "react";
 import {
-  useAddMortalityLogMutation,
-  useEditMortalityLogMutation,
+  useAddFeedLogMutation,
+  useEditFeedLogMutation,
 } from "@/redux/services/pondsApiSlice";
 import { Modal } from "./Modal";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { LogData } from "@/types";
 
-const AddMortalityLogModal = ({
+const AddFeedLogModal = ({
   farmId,
   pondId,
   open,
@@ -22,15 +22,15 @@ const AddMortalityLogModal = ({
   setOpen: (open: boolean) => void;
   logData?: LogData;
 }) => {
-  const [mortality, setMortality] = useState("");
-  const [addMortalityLog, { isLoading: isAdding }] =
-    useAddMortalityLogMutation();
-  const [editMortalityLog, { isLoading: isEditing }] =
-    useEditMortalityLogMutation();
+  const [feedBags, setFeedBags] = useState("");
+  const [feedSize, setFeedSize] = useState("");
+  const [addFeedLog, { isLoading: isAdding }] = useAddFeedLogMutation();
+  const [editFeedLog, { isLoading: isEditing }] = useEditFeedLogMutation();
 
   useEffect(() => {
     if (logData) {
-      setMortality(logData.log);
+      setFeedBags(logData.log);
+      setFeedSize(logData.feed_size);
     }
   }, [logData]);
 
@@ -38,22 +38,22 @@ const AddMortalityLogModal = ({
     e.preventDefault();
     try {
       if (logData) {
-        await editMortalityLog({
-          formdata: { mortality },
+        await editFeedLog({
+          formdata: { feed_bags: feedBags, feed_size: feedSize },
           farmId,
           pondId,
           logId: logData.id,
         }).unwrap();
       } else {
-        await addMortalityLog({
-          formdata: { mortality },
+        await addFeedLog({
+          formdata: { feed_bags: feedBags, feed_size: feedSize },
           farmId,
           pondId,
         }).unwrap();
       }
       setOpen(false);
     } catch (error) {
-      console.error("Failed to save mortality log:", error);
+      console.error("Failed to save feed log:", error);
     }
   };
 
@@ -61,14 +61,20 @@ const AddMortalityLogModal = ({
     <Modal
       open={open}
       setOpen={setOpen}
-      title={logData ? "Edit Mortality Log" : "Add Mortality Log"}>
+      title={logData ? "Edit Feed Log" : "Add Feed Log"}>
       <form onSubmit={handleSubmit}>
         <div className="space-y-4">
           <Input
             type="number"
-            placeholder="Mortality Count"
-            value={mortality}
-            onChange={(e) => setMortality(e.target.value)}
+            placeholder="Number of Feed Bags"
+            value={feedBags}
+            onChange={(e) => setFeedBags(e.target.value)}
+          />
+          <Input
+            type="number"
+            placeholder="Size of Feed (mm)"
+            value={feedSize}
+            onChange={(e) => setFeedSize(e.target.value)}
           />
           <Button type="submit" disabled={isAdding || isEditing} className="btn-primary">
             {isAdding || isEditing ? "Saving..." : "Save"}
@@ -79,4 +85,4 @@ const AddMortalityLogModal = ({
   );
 };
 
-export default AddMortalityLogModal;
+export default AddFeedLogModal;

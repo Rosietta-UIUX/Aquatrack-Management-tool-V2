@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { Progress } from "@/components/ui/progress";
-import DeleteModal from "./DeleteModal";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,45 +13,29 @@ import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import EditPondModal from "./EditPondModal";
 import DeletePondModal from "./DeletePondModal";
-import MortalityLog from "./MortalityLog";
+import LogHistory from "./LogHistory";
 import AddMortalityLogModal from "./AddMortalityLogModal";
+import AddFeedLogModal from "./AddFeedLogModal";
 
 const PondDetails = ({ pond, farmId }: any) => {
   const [openDel, setOpenDel] = useState(false);
-  const [pondID, setPondID] = useState("");
-  const [pondData, setPondData] = useState("");
   const [openEd, setOpenEd] = useState(false);
   const [showLog, setShowLog] = useState(false);
   const [openAddLog, setOpenAddLog] = useState(false);
-
-  // console.log(pond);
-
-  const openDeleteModal = (pondID: any) => {
-    if (pondID) {
-      setOpenDel(true);
-      setPondID(pondID);
-    }
-  };
-
-  const openEditModal = (pondData: any) => {
-    if (pondData) {
-      setOpenEd(true);
-      setPondData(pondData);
-    }
-  };
+  const [openAddFeedLog, setOpenAddFeedLog] = useState(false);
 
   return (
     <div className="card bg-white rounded-xl p-6">
       <DeletePondModal
         farmId={farmId}
-        openDelID={pondID}
+        openDelID={pond?.id}
         open={openDel}
         setOpen={setOpenDel}
       />
-      {pondData && (
+      {openEd && (
         <EditPondModal
           farmId={farmId}
-          pondData={pondData}
+          pondData={pond}
           open={openEd}
           setOpen={setOpenEd}
         />
@@ -62,6 +45,12 @@ const PondDetails = ({ pond, farmId }: any) => {
         pondId={pond?.id}
         open={openAddLog}
         setOpen={setOpenAddLog}
+      />
+      <AddFeedLogModal
+        farmId={farmId}
+        pondId={pond?.id}
+        open={openAddFeedLog}
+        setOpen={setOpenAddFeedLog}
       />
       <div className="head flex items-center justify-between mb-2">
         <h2 className="font-bold text-[--primary] text-base ">
@@ -79,14 +68,14 @@ const PondDetails = ({ pond, farmId }: any) => {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem
-              onClick={() => openEditModal(pond)}
+              onClick={() => setOpenEd(true)}
               className="space-x-4 text-blue-600 font-bold"
             >
               <MdEdit className="text-blue-600 text-xl" /> <span>Edit</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              onClick={() => openDeleteModal(pond?.id)}
+              onClick={() => setOpenDel(true)}
               className="space-x-4 text-red-600 font-bold"
             >
               <MdDelete className="text-red-600 text-xl" />
@@ -154,14 +143,25 @@ const PondDetails = ({ pond, farmId }: any) => {
         </div>
       </div>
       <div className="mt-4 flex space-x-2">
-        <Button onClick={() => setShowLog(!showLog)} size="sm">
+        <Button onClick={() => setShowLog(!showLog)} size="sm" variant="outline">
           {showLog ? "Hide Log" : "View Log"}
         </Button>
-        <Button onClick={() => setOpenAddLog(true)} size="sm" variant="outline">
-          Add Log
+        <Button
+          onClick={() => setOpenAddLog(true)}
+          size="sm"
+          className="btn-primary"
+        >
+          Add Mortality Log
+        </Button>
+        <Button
+          onClick={() => setOpenAddFeedLog(true)}
+          size="sm"
+          className="btn-primary"
+        >
+          Add Feed Log
         </Button>
       </div>
-      {showLog && <MortalityLog farmId={farmId} pondId={pond?.id} />}
+      {showLog && <LogHistory farmId={farmId} pondId={pond?.id} />}
     </div>
   );
 };
