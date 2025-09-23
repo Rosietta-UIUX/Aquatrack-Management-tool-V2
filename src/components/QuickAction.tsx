@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import addpondIcon from "@/public/icons/add-pond.png";
 import viewIcon from "@/public/icons/view-stat.png";
 import AddPondModal from "./AddPondModal";
@@ -20,10 +21,11 @@ const QuickAction = ({ farmId }: any) => {
       <h2 className="text-[--primary] font-bold lg:text-2xl text-lg">
         Quick Actions
       </h2>
-      <div className="lg:w-8/12 grid grid-cols-2 lg:gap-8 gap-3 lg:mt-10 mt-4">
+      <div className="lg:w-8/12 grid grid-cols-3 lg:gap-8 gap-3 lg:mt-10 mt-4">
         <div
           onClick={() => setOpen(true)}
-          className="card bg-white rounded-xl lg:p-6 p-4 cursor-pointer flex lg:items-center items-center lg:space-x-4 space-x-2">
+          className="card bg-white rounded-xl lg:p-6 p-4 cursor-pointer flex lg:items-center items-center lg:space-x-4 space-x-2"
+        >
           <div>
             <Image
               src={addpondIcon}
@@ -52,7 +54,8 @@ const QuickAction = ({ farmId }: any) => {
         </div>
         <div
           onClick={() => setOpenStats(true)}
-          className="card bg-white rounded-xl lg:p-6 p-4 cursor-pointer flex items-center lg:space-x-4 space-x-2">
+          className="card bg-white rounded-xl lg:p-6 p-4 cursor-pointer flex items-center lg:space-x-4 space-x-2"
+        >
           <div>
             <Image
               src={viewIcon}
@@ -79,6 +82,35 @@ const QuickAction = ({ farmId }: any) => {
             </p>
           </div>
         </div>
+        <Link href="/account/reports">
+          <div className="card bg-white rounded-xl lg:p-6 p-4 cursor-pointer flex items-center lg:space-x-4 space-x-2">
+            <div>
+              <Image
+                src={viewIcon}
+                alt="Greeting Image"
+                layout="fixed"
+                width="60"
+                height="50"
+                priority
+                className="lg:flex hidden"
+              />
+              <Image
+                src={viewIcon}
+                alt="Greeting Image"
+                layout="fixed"
+                width="30"
+                height="30"
+                priority
+                className="flex lg:hidden"
+              />
+            </div>
+            <div className="stat">
+              <p className="text-gray-400 lg:text-base text-[13px]">
+                Reports
+              </p>
+            </div>
+          </div>
+        </Link>
       </div>
     </section>
   );

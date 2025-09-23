@@ -14,12 +14,16 @@ import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import EditPondModal from "./EditPondModal";
 import DeletePondModal from "./DeletePondModal";
+import MortalityLog from "./MortalityLog";
+import AddMortalityLogModal from "./AddMortalityLogModal";
 
 const PondDetails = ({ pond, farmId }: any) => {
   const [openDel, setOpenDel] = useState(false);
   const [pondID, setPondID] = useState("");
   const [pondData, setPondData] = useState("");
   const [openEd, setOpenEd] = useState(false);
+  const [showLog, setShowLog] = useState(false);
+  const [openAddLog, setOpenAddLog] = useState(false);
 
   // console.log(pond);
 
@@ -53,6 +57,12 @@ const PondDetails = ({ pond, farmId }: any) => {
           setOpen={setOpenEd}
         />
       )}
+      <AddMortalityLogModal
+        farmId={farmId}
+        pondId={pond?.id}
+        open={openAddLog}
+        setOpen={setOpenAddLog}
+      />
       <div className="head flex items-center justify-between mb-2">
         <h2 className="font-bold text-[--primary] text-base ">
           {pond?.attributes?.name}
@@ -62,20 +72,23 @@ const PondDetails = ({ pond, farmId }: any) => {
           <DropdownMenuTrigger>
             <Button
               variant="ghost"
-              className="text-xs text-[--secondary] font-normal">
+              className="text-xs text-[--secondary] font-normal"
+            >
               view details
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem
               onClick={() => openEditModal(pond)}
-              className="space-x-4 text-blue-600 font-bold">
+              className="space-x-4 text-blue-600 font-bold"
+            >
               <MdEdit className="text-blue-600 text-xl" /> <span>Edit</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => openDeleteModal(pond?.id)}
-              className="space-x-4 text-red-600 font-bold">
+              className="space-x-4 text-red-600 font-bold"
+            >
               <MdDelete className="text-red-600 text-xl" />
               <span>Delete</span>
             </DropdownMenuItem>
@@ -140,6 +153,15 @@ const PondDetails = ({ pond, farmId }: any) => {
           </p>
         </div>
       </div>
+      <div className="mt-4 flex space-x-2">
+        <Button onClick={() => setShowLog(!showLog)} size="sm">
+          {showLog ? "Hide Log" : "View Log"}
+        </Button>
+        <Button onClick={() => setOpenAddLog(true)} size="sm" variant="outline">
+          Add Log
+        </Button>
+      </div>
+      {showLog && <MortalityLog farmId={farmId} pondId={pond?.id} />}
     </div>
   );
 };
