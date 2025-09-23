@@ -30,7 +30,7 @@ const AddMortalityLogModal = ({
 
   useEffect(() => {
     if (logData) {
-      setMortality(logData.log);
+      setMortality(logData.log || "");
     }
   }, [logData]);
 

@@ -30,7 +30,7 @@ const AddFeedLogModal = ({
   useEffect(() => {
     if (logData) {
       setFeedBags(logData.log);
-      setFeedSize(logData.feed_size);
+      setFeedSize(logData.feed_size || "");
     }
   }, [logData]);
 
