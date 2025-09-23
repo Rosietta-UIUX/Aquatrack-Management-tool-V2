@@ -1,6 +1,6 @@
 "use client";
 import { useGetMortalityLogsQuery } from "@/redux/services/pondsApiSlice";
-import { DataTable } from "./ui/data-table";
+import { DataTable } from "@/components/ui/table";
 
 const MortalityLog = ({ farmId, pondId }: { farmId: string; pondId: string }) => {
   const { data, isLoading } = useGetMortalityLogsQuery({ farmId, pondId });
