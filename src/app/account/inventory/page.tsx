@@ -11,6 +11,7 @@ import CreateFarmState from "@/components/CreateFarmState";
 import { Skeleton } from "@/components/ui/skeleton";
 import useDefaultFarmId from "@/hooks/useDefaultFarmId";
 import ExpensesRecord from "@/components/ExpensesRecord";
+import LogSheet from "@/components/LogSheet";
 
 const InventoryPage = () => {
   const { isLoading, data } = useGetCurrentUserQuery(null);
@@ -48,7 +49,7 @@ const InventoryPage = () => {
             {defaultFarmId ? (
               <>
                 <Tabs defaultValue="feeds" className="w-full">
-                  <TabsList className="grid w-full grid-cols-4 lg:gap-x-6 gap-x-10 lg:w-5/12">
+                  <TabsList className="grid w-full grid-cols-5 lg:gap-x-6 gap-x-10 lg:w-6/12">
                     <TabsTrigger
                       value="feeds"
                       className="bg-transparent font-normal data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-[--primary] data-[state=active]:font-bold data-[state=active]:rounded-none data-[state=active]:border-b-4 data-[state=active]:border-[--primary] data-[state=active]:pb-2 lg:text-base text-sm lg:data-[state=active]:text-sm data-[state=active]:text-sm">
@@ -58,6 +59,11 @@ const InventoryPage = () => {
                       value="expenses"
                       className="bg-transparent font-normal data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-[--primary] data-[state=active]:font-bold data-[state=active]:rounded-none data-[state=active]:border-b-4 data-[state=active]:border-[--primary] data-[state=active]:pb-2 lg:text-base text-sm lg:data-[state=active]:text-base data-[state=active]:text-sm">
                       Expenses
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="log-sheet"
+                      className="bg-transparent font-normal data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-[--primary] data-[state=active]:font-bold data-[state=active]:rounded-none data-[state=active]:border-b-4 data-[state=active]:border-[--primary] data-[state=active]:pb-2 lg:text-base text-sm lg:data-[state=active]:text-base data-[state=active]:text-sm">
+                      Log Sheet
                     </TabsTrigger>
                     <TabsTrigger
                       value="employees"
@@ -157,6 +163,30 @@ const InventoryPage = () => {
                               No Customer record Added
                             </h2>
                             <p>Create a farm to add customer records</p>
+                          </div>
+                          <Image
+                            src={emptyImg}
+                            alt="empty"
+                            height={300}
+                            width={200}
+                            layout="fixed"
+                            className="mx-auto"
+                          />
+                        </div>
+                      </section>
+                    )}
+                  </TabsContent>
+                  <TabsContent value="log-sheet">
+                    {defaultFarmId ? (
+                      <LogSheet />
+                    ) : (
+                      <section className="h-[70vh] flex items-center justify-center">
+                        <div className="relative lg:w-6/12 w-10/12 mx-auto">
+                          <div className="text absolute top-14 w-full text-center">
+                            <h2 className="font-bold text-2xl mb-2">
+                              No Log Sheet Added
+                            </h2>
+                            <p>Create a farm to add log sheet</p>
                           </div>
                           <Image
                             src={emptyImg}

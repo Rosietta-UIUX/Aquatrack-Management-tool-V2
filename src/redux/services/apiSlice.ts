@@ -19,6 +19,7 @@ export const api = createApi({
     "Tasks",
     "Teams",
     "User",
+    "LogSheet",
   ],
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}`,
