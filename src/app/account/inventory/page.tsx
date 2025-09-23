@@ -49,30 +49,30 @@ const InventoryPage = () => {
             {defaultFarmId ? (
               <>
                 <Tabs defaultValue="feeds" className="w-full">
-                  <TabsList className="grid w-full grid-cols-5 lg:gap-x-6 gap-x-10 lg:w-6/12">
+                  <TabsList className="flex items-center justify-start w-full overflow-x-auto">
                     <TabsTrigger
                       value="feeds"
-                      className="bg-transparent font-normal data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-[--primary] data-[state=active]:font-bold data-[state=active]:rounded-none data-[state=active]:border-b-4 data-[state=active]:border-[--primary] data-[state=active]:pb-2 lg:text-base text-sm lg:data-[state=active]:text-sm data-[state=active]:text-sm">
-                      Feed <span className="lg:flex hidden ml-1">Records</span>
+                      className="bg-transparent font-normal data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-[--primary] data-[state=active]:font-bold data-[state=active]:rounded-none data-[state=active]:border-b-4 data-[state=active]:border-[--primary] data-[state=active]:pb-2 text-base lg:text-lg whitespace-nowrap px-4">
+                      Feed Records
                     </TabsTrigger>
                     <TabsTrigger
                       value="expenses"
-                      className="bg-transparent font-normal data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-[--primary] data-[state=active]:font-bold data-[state=active]:rounded-none data-[state=active]:border-b-4 data-[state=active]:border-[--primary] data-[state=active]:pb-2 lg:text-base text-sm lg:data-[state=active]:text-base data-[state=active]:text-sm">
+                      className="bg-transparent font-normal data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-[--primary] data-[state=active]:font-bold data-[state=active]:rounded-none data-[state=active]:border-b-4 data-[state=active]:border-[--primary] data-[state=active]:pb-2 text-base lg:text-lg whitespace-nowrap px-4">
                       Expenses
                     </TabsTrigger>
                     <TabsTrigger
                       value="log-sheet"
-                      className="bg-transparent font-normal data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-[--primary] data-[state=active]:font-bold data-[state=active]:rounded-none data-[state=active]:border-b-4 data-[state=active]:border-[--primary] data-[state=active]:pb-2 lg:text-base text-sm lg:data-[state=active]:text-base data-[state=active]:text-sm">
+                      className="bg-transparent font-normal data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-[--primary] data-[state=active]:font-bold data-[state=active]:rounded-none data-[state=active]:border-b-4 data-[state=active]:border-[--primary] data-[state=active]:pb-2 text-base lg:text-lg whitespace-nowrap px-4">
                       Log Sheet
                     </TabsTrigger>
                     <TabsTrigger
                       value="employees"
-                      className="bg-transparent font-normal data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-[--primary] data-[state=active]:font-bold data-[state=active]:rounded-none data-[state=active]:border-b-4 data-[state=active]:border-[--primary] data-[state=active]:pb-2 lg:text-base text-sm lg:data-[state=active]:text-base data-[state=active]:text-sm">
+                      className="bg-transparent font-normal data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-[--primary] data-[state=active]:font-bold data-[state=active]:rounded-none data-[state=active]:border-b-4 data-[state=active]:border-[--primary] data-[state=active]:pb-2 text-base lg:text-lg whitespace-nowrap px-4">
                       Employees
                     </TabsTrigger>
                     <TabsTrigger
                       value="customers"
-                      className="bg-transparent font-normal data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-[--primary] data-[state=active]:font-bold data-[state=active]:rounded-none data-[state=active]:border-b-4 data-[state=active]:border-[--primary] data-[state=active]:pb-2 lg:text-base text-sm lg:data-[state=active]:text-base data-[state=active]:text-sm">
+                      className="bg-transparent font-normal data-[state=active]:shadow-none data-[state=active]:bg-transparent data-[state=active]:text-[--primary] data-[state=active]:font-bold data-[state=active]:rounded-none data-[state=active]:border-b-4 data-[state=active]:border-[--primary] data-[state=active]:pb-2 text-base lg:text-lg whitespace-nowrap px-4">
                       Customers
                     </TabsTrigger>
                   </TabsList>

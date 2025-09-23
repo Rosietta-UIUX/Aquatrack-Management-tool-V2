@@ -98,7 +98,7 @@ const LogSheet = () => {
                 />
               </CardContent>
               <CardFooter>
-                <Button type="submit" className="w-full" variant="default">Log Expense</Button>
+                <Button type="submit" className="w-full bg-primary text-primary-foreground" variant="default">Log Expense</Button>
               </CardFooter>
             </form>
           </Card>
@@ -136,7 +136,7 @@ const LogSheet = () => {
       </section>
 
       <section className="mt-10">
-        <div className="flex items-center space-x-4">
+        <div className="flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-4">
           <Input
             type="date"
             value={startDate}
