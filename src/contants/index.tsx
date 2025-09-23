@@ -78,14 +78,8 @@ export const links = [
   },
   {
     id: 8,
-    title: "FCR Calculator",
+    title: "Analytics",
     icon: Calculator,
-    link: "/account/fcr-calculator",
-  },
-  {
-    id: 9,
-    title: "Production Plan",
-    icon: TrendingUp,
-    link: "/account/production-plan",
+    link: "/account/analytics",
   },
 ];
