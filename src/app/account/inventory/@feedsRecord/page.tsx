@@ -112,6 +112,7 @@ const FeedRecord = ({ farmId }: any) => {
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
+            <SelectItem value="">All Batches</SelectItem>
             {batches?.data.map(
               (item: { id: string; batch_name: string }) => (
                 <SelectItem key={item.id} value={item.id}>
