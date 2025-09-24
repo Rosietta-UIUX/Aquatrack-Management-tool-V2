@@ -62,6 +62,16 @@ const pondApi = pondApiConfig.injectEndpoints({
       },
       providesTags: ["DailyReport"],
     }),
+    getDailySummary: builder.query({
+      query: ({ farmId, date }) => {
+        let url = `/farmer/${farmId}/daily-summary`;
+        if (date) {
+          url += `?date=${date}`;
+        }
+        return url;
+      },
+      providesTags: ["DailyReport"],
+    }),
     addMortalityLog: builder.mutation({
       query: ({ formdata, farmId, pondId }) => ({
         url: `/farmer/${farmId}/pond/${pondId}/mortality-logs`,
@@ -121,6 +131,7 @@ export const {
   useGetMortalityLogsQuery,
   useGetAllLogsQuery,
   useGetDailyReportQuery,
+  useGetDailySummaryQuery,
   useAddMortalityLogMutation,
   useEditMortalityLogMutation,
   useDeleteMortalityLogMutation,
