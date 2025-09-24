@@ -65,12 +65,6 @@ export const links = [
     link: "/account/harvest",
   },
   {
-    id: 6,
-    title: "Settings",
-    icon: Settings,
-    link: "/account/settings",
-  },
-  {
     id: 7,
     title: "AI Assistant",
     icon: Bot,
@@ -81,5 +75,11 @@ export const links = [
     title: "Analytics",
     icon: TrendingUp,
     link: "/account/analytics",
+  },
+  {
+    id: 6,
+    title: "Settings",
+    icon: Settings,
+    link: "/account/settings",
   },
 ];
