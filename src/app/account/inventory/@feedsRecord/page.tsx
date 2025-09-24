@@ -39,6 +39,7 @@ const FeedRecord = ({ farmId }: any) => {
   const [deleteAllFeeds] = useDeleteAllFeedsMutation();
   const [open, setOpen] = useState(false);
   const [openDel, setOpenDel] = useState(false);
+  const [batch, setBatch] = useState<string>("");
   const { data, isLoading } = useGetFeedsQuery({
     farmId,
     params: currentPage,
@@ -92,7 +93,6 @@ const FeedRecord = ({ farmId }: any) => {
   };
 
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [batch, setBatch] = useState<string>("");
   const [filteredData, setFilteredData] = useState<any[]>([]);
 
   const handleSearch = (query: string) => {
