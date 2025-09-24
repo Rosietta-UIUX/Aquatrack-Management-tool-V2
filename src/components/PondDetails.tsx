@@ -17,7 +17,32 @@ import LogHistory from "./LogHistory";
 import AddMortalityLogModal from "./AddMortalityLogModal";
 import AddFeedLogModal from "./AddFeedLogModal";
 
-const PondDetails = ({ pond, farmId }: any) => {
+interface Pond {
+  id: string;
+  attributes: {
+    name: string;
+    unit: number;
+    feed_size: number;
+    size: number;
+    unit_size: string;
+    mortality_rate: number;
+  };
+  percentage: {
+    unit: number;
+    feed_size: number;
+    size: number;
+    mortality_rate: number;
+  };
+  relationships: {
+    batch: {
+      data: {
+        name: string;
+      };
+    };
+  };
+}
+
+const PondDetails = ({ pond, farmId }: { pond: Pond; farmId: string }) => {
   const [openDel, setOpenDel] = useState(false);
   const [openEd, setOpenEd] = useState(false);
   const [showLog, setShowLog] = useState(false);
@@ -72,6 +97,13 @@ const PondDetails = ({ pond, farmId }: any) => {
               className="space-x-4 text-blue-600 font-bold"
             >
               <MdEdit className="text-blue-600 text-xl" /> <span>Edit</span>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+                onClick={() => setShowLog(!showLog)}
+                className="space-x-4 text-gray-600 font-bold"
+            >
+                <span>{showLog ? "Hide Log" : "View Log"}</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
@@ -142,10 +174,7 @@ const PondDetails = ({ pond, farmId }: any) => {
           </p>
         </div>
       </div>
-      <div className="mt-4 flex space-x-2">
-        <Button onClick={() => setShowLog(!showLog)} size="sm" variant="outline">
-          {showLog ? "Hide Log" : "View Log"}
-        </Button>
+      <div className="mt-4 flex space-x-2 justify-end">
         <Button
           onClick={() => setOpenAddLog(true)}
           size="sm"

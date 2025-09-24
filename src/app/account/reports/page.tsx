@@ -17,6 +17,45 @@ import AddFeedLogModal from "@/components/AddFeedLogModal";
 import Papa from "papaparse";
 import { ArrowLeft } from "lucide-react";
 import { LogData } from "@/types";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useGetDailySummaryQuery } from "@/redux/services/pondsApiSlice";
+
+const DailySummaryMetrics = () => {
+  const { defaultFarmId } = useDefaultFarmId();
+  const { data, isLoading } = useGetDailySummaryQuery({
+    farmId: defaultFarmId,
+    date: new Date().toISOString().split("T")[0],
+  });
+
+  return (
+    <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="card bg-white p-6 rounded-2xl shadow-md flex items-center space-x-4 hover:shadow-lg transition-shadow">
+        <div className="stat">
+          <p className="text-gray-500 text-sm">Total Mortality Today</p>
+          {isLoading ? (
+            <Skeleton className="h-7 w-24 bg-gray-200 mt-1" />
+          ) : (
+            <h2 className="font-bold text-2xl">
+              {data?.data?.total_mortality || 0}
+            </h2>
+          )}
+        </div>
+      </div>
+      <div className="card bg-white p-6 rounded-2xl shadow-md flex items-center space-x-4 hover:shadow-lg transition-shadow">
+        <div className="stat">
+          <p className="text-gray-500 text-sm">Total Feed Bags Today</p>
+          {isLoading ? (
+            <Skeleton className="h-7 w-24 bg-gray-200 mt-1" />
+          ) : (
+            <h2 className="font-bold text-2xl">
+              {data?.data?.total_feed_bags || 0}
+            </h2>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const ReportsPage = () => {
   const [activeTab, setActiveTab] = useState("history");
@@ -196,6 +235,7 @@ const ReportsPage = () => {
             <div className="mt-4">
               {activeTab === "history" && (
                 <div>
+                  <DailySummaryMetrics />
                   <div className="flex space-x-4 mb-4">
                     <Input
                       type="date"
