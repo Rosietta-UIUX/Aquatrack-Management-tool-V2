@@ -17,6 +17,7 @@ import AddPurchaseModal from "../@addPurchaseModal/page";
 import FeedsTable from "../@feedsTable/page";
 import DeleteModal from "../@deleteModal/page";
 import { useDeleteAllFeedsMutation, useGetFeedsQuery } from "@/redux/services/feedRecordApiSlice";
+import { useGetAllBatchsDataQuery } from "@/redux/services/batchApiSlice";
 import { Skeleton } from "@/components/ui/skeleton";
 import { searchTableData } from "@/utils";
 import toast from "react-hot-toast";
@@ -38,7 +39,12 @@ const FeedRecord = ({ farmId }: any) => {
   const [deleteAllFeeds] = useDeleteAllFeedsMutation();
   const [open, setOpen] = useState(false);
   const [openDel, setOpenDel] = useState(false);
-  const { data, isLoading } = useGetFeedsQuery({ farmId, params: currentPage });
+  const { data, isLoading } = useGetFeedsQuery({
+    farmId,
+    params: currentPage,
+    batch,
+  });
+  const { data: batches } = useGetAllBatchsDataQuery({ farmId });
   const [selectAll, setSelectAll] = useState(false);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
@@ -86,6 +92,7 @@ const FeedRecord = ({ farmId }: any) => {
   };
 
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [batch, setBatch] = useState<string>("");
   const [filteredData, setFilteredData] = useState<any[]>([]);
 
   const handleSearch = (query: string) => {
@@ -98,17 +105,22 @@ const FeedRecord = ({ farmId }: any) => {
       <AddPurchaseModal farmId={farmId} open={open} setOpen={setOpen} />
       <DeleteModal open={openDel} setOpen={setOpenDel} />
       {/* Header section */}
-      {/* <Select>
+      <Select onValueChange={(e) => setBatch(e)}>
         <SelectTrigger className=" h-10 border-gray-400 bg-white lg:w-[100px] w-[150px]">
           <SelectValue placeholder="Batch" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>Batch 1</SelectLabel>
-            <SelectLabel>Batch 2</SelectLabel>
+            {batches?.data.map(
+              (item: { id: string; batch_name: string }) => (
+                <SelectItem key={item.id} value={item.id}>
+                  {item.batch_name}
+                </SelectItem>
+              )
+            )}
           </SelectGroup>
         </SelectContent>
-      </Select> */}
+      </Select>
       <section className="grid grid-cols-1 lg:flex lg:items-center justify-between gap-8 mt-8">
         <div className="flex items-center justify-between space-x-6 lg:w-8/12 w-full">
           <div className="flex items-center bg-white py-2 px-4 rounded-lg w-full">

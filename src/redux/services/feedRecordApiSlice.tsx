@@ -7,8 +7,10 @@ const feedRecordApiConfig = api.enhanceEndpoints({
 const feedRecordApi = feedRecordApiConfig.injectEndpoints({
   endpoints: (builder) => ({
     getFeeds: builder.query({
-      query: ({ farmId, params }) =>
-        `/farmer/${farmId}/inventory?page=${params}`,
+      query: ({ farmId, params, batch }) =>
+        `/farmer/${farmId}/inventory?page=${params}${
+          batch ? `&filter[batch_id]=${batch}` : ""
+        }`,
       providesTags: ["Feeds"],
     }),
     createFeed: builder.mutation({
