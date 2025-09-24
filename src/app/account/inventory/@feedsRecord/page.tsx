@@ -106,13 +106,20 @@ const FeedRecord = ({ farmId }: any) => {
       <AddPurchaseModal farmId={farmId} open={open} setOpen={setOpen} />
       <DeleteModal open={openDel} setOpen={setOpenDel} />
       {/* Header section */}
-      <Select onValueChange={(e) => setBatch(e)}>
+      <Select
+        onValueChange={(e) => {
+          if (e === "all") {
+            setBatch("");
+          } else {
+            setBatch(e);
+          }
+        }}>
         <SelectTrigger className=" h-10 border-gray-400 bg-white lg:w-[100px] w-[150px]">
           <SelectValue placeholder="Batch" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectItem value="">All Batches</SelectItem>
+            <SelectItem value="all">All Batches</SelectItem>
             {batches?.data.map(
               (item: { id: string; batch_name: string }) => (
                 <SelectItem key={item.id} value={item.id}>
