@@ -111,6 +111,9 @@ const HarvestSinglePage = ({ params }: any) => {
   }, [harvestData]);
 
   const handleDownloadSheet = async () => {
+    if (!defaultFarmId || !params?.id) {
+      return;
+    }
     try {
       const token = await fetchToken();
       const headers = {

@@ -7,8 +7,12 @@ const customerApiConfig = api.enhanceEndpoints({
 const customerApi = customerApiConfig.injectEndpoints({
   endpoints: (builder) => ({
     getCustomers: builder.query({
-      query: ({ farmId, harvestId, params }) =>
-        `/farmer/${farmId}/harvest/${harvestId}/customer?page=${params}`,
+      query: ({ farmId, harvestId, params }) => {
+        if (!farmId || !harvestId) {
+          return "";
+        }
+        return `/farmer/${farmId}/harvest/${harvestId}/customer?page=${params}`;
+      },
       providesTags: ["Customer"],
       keepUnusedDataFor: 30,
     }),

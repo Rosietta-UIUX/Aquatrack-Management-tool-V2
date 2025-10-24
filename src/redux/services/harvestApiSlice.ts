@@ -11,8 +11,13 @@ const harvestApi = harvestApiConfig.injectEndpoints({
       providesTags: ["Harvest"],
     }),
     getHarvest: builder.query({
-      query: ({ farmId, harvestId }) =>
-        `/farmer/${farmId}/harvest/${harvestId}`,
+      query: ({ farmId, harvestId }) => {
+        if (!farmId || !harvestId) {
+          // Return an empty query to prevent the API call
+          return "";
+        }
+        return `/farmer/${farmId}/harvest/${harvestId}`;
+      },
       providesTags: ["Harvest"],
     }),
     createHarvest: builder.mutation({
