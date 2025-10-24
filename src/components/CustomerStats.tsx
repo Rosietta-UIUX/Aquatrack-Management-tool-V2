@@ -40,7 +40,7 @@ const CustomerStats = ({ data, isLoading }: any) => {
                 ₦{" "}
                 {hide
                   ? "*****"
-                  : formatCurrency(data?.details?.relationships?.total_amount)}
+                  : formatCurrency(data?.details?.relationships?.total_amount || 0)}
               </h2>
             )}
             {/* <div className="text-right flex items-center justify-end mt-2">
@@ -64,7 +64,7 @@ const CustomerStats = ({ data, isLoading }: any) => {
                 ₦{" "}
                 {hide
                   ? "*****"
-                  : formatCurrency(data?.card_data?.total_capital)}
+                  : formatCurrency(data?.card_data?.total_capital || 0)}
               </h2>
             )}
             {/* <div className="text-right flex items-center justify-end mt-2">
@@ -90,7 +90,7 @@ const CustomerStats = ({ data, isLoading }: any) => {
                   ? "*****"
                   : isNegative(data?.card_data?.total_profit)
                   ? "0.00"
-                  : formatCurrency(data?.card_data?.total_profit)}
+                  : formatCurrency(data?.card_data?.total_profit || 0)}
               </h2>
             )}
             {/* <div className="text-right flex items-center justify-end mt-2">
@@ -129,7 +129,7 @@ const CustomerStats = ({ data, isLoading }: any) => {
                 ? "*****"
                 : isNegative(data?.card_data?.total_profit)
                 ? "0.00"
-                : formatCurrency(data?.card_data?.total_profit)}
+                  : formatCurrency(data?.card_data?.total_profit || 0)}
             </h2>
           )}
           {/* <div className="text-right flex items-center justify-end">
@@ -172,7 +172,7 @@ const CustomerStats = ({ data, isLoading }: any) => {
               ) : (
                 <h2 className="font-semibold text-[--primary] lg:text-lg text-base">
                   {" "}
-                  {hide ? "*****" : formatCurrency(data?.card_data?.expenses)}
+                {hide ? "*****" : formatCurrency(data?.card_data?.expenses || 0)}
                 </h2>
               )}
               {/* <div className="text-right flex items-center justify-end mt-2">

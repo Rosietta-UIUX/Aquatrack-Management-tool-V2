@@ -7,12 +7,12 @@ const expenseRecordApiConfig = api.enhanceEndpoints({
 const expenseRecordApi = expenseRecordApiConfig.injectEndpoints({
   endpoints: (builder) => ({
     getExpenses: builder.query({
-      query: ({ farmId }) => `/farmer/${farmId}/expense`,
+      query: ({ farmId }) => `farmer/${farmId}/expense`,
       providesTags: ["Expense"],
     }),
     createExpense: builder.mutation({
       query: ({ formdata, farmId }) => ({
-        url: `/farmer/${farmId}/expense`,
+        url: `farmer/${farmId}/expense`,
         method: `POST`,
         body: formdata,
       }),
@@ -20,7 +20,7 @@ const expenseRecordApi = expenseRecordApiConfig.injectEndpoints({
     }),
     editExpense: builder.mutation({
       query: ({ formdata, farmId, expenseId }) => ({
-        url: `/farmer/${farmId}/expense/${expenseId}`,
+        url: `farmer/${farmId}/expense/${expenseId}`,
         method: `PATCH`,
         body: formdata,
       }),
@@ -28,14 +28,14 @@ const expenseRecordApi = expenseRecordApiConfig.injectEndpoints({
     }),
     deleteExpense: builder.mutation({
       query: ({ farmId, expenseId }) => ({
-        url: `/farmer/${farmId}/expense/${expenseId}`,
+        url: `farmer/${farmId}/expense/${expenseId}`,
         method: `DELETE`,
       }),
       invalidatesTags: ["Expense"],
     }),
     deleteAllExpense: builder.mutation({
       query: ({ formdata }) => ({
-        url: `/farmer/delete-all`,
+        url: `farmer/delete-all`,
         method: `POST`,
         body: formdata,
       }),

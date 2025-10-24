@@ -17,9 +17,14 @@ const AccountPage = () => {
   const { isLoading: loading, data } = useGetCurrentUserQuery(null);
   const { data: billingData } = useGetBuillingRecordsQuery(null);
   const { defaultFarmId } = useDefaultFarmId();
-  const { isLoading, data: dashboard } = useGetFarmDataQuery({
-    farmId: defaultFarmId,
-  });
+  const { isLoading, data: dashboard } = useGetFarmDataQuery(
+    {
+      farmId: defaultFarmId,
+    },
+    {
+      skip: !defaultFarmId,
+    }
+  );
 
   const subscriptionData = billingData?.data?.transaction_history?.data;
 

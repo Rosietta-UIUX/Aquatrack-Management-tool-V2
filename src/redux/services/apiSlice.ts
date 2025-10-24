@@ -22,7 +22,7 @@ export const api = createApi({
     "LogSheet",
   ],
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_URL}`,
+    baseUrl: `${process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "")}`,
     prepareHeaders: async (headers) => {
       const token = await fetchToken(); // Fetch the token using the utility function
       if (token) {

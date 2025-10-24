@@ -5,7 +5,12 @@ import useDefaultFarmId from "./useDefaultFarmId";
 
 const useCheckSubscriptionStatus = () => {
   const { defaultFarmId } = useDefaultFarmId();
-  const { data } = useGetSubscriptionStatusQuery({ farmId: defaultFarmId });
+  const { data } = useGetSubscriptionStatusQuery(
+    { farmId: defaultFarmId },
+    {
+      skip: !defaultFarmId,
+    }
+  );
 
   return { active_subscription: data?.data?.active_subscription };
 };

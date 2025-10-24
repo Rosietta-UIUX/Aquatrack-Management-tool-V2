@@ -7,7 +7,7 @@ const benefiApiConfig = api.enhanceEndpoints({
 const benefiApi = benefiApiConfig.injectEndpoints({
   endpoints: (builder) => ({
     getBeneficiaries: builder.query({
-      query: ({ farmId }) => `/farmer/${farmId}/beneficiaries`,
+      query: ({ farmId }) => `farmer/${farmId}/beneficiaries`,
       providesTags: ["Beneficiaries"],
       keepUnusedDataFor: 30,
     }),
