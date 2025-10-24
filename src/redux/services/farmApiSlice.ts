@@ -18,7 +18,12 @@ const farmApi = farmApiConfig.injectEndpoints({
       providesTags: ["Farms"],
     }),
     getFarmData: builder.query({
-      query: ({ farmId }) => `/farmer/${farmId}/dashboard`,
+      query: ({ farmId }) => {
+        if (!farmId) {
+          return "";
+        }
+        return `/farmer/${farmId}/dashboard`;
+      },
       providesTags: ["Farms"],
     }),
     createFarm: builder.mutation<void, any>({

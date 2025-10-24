@@ -7,7 +7,12 @@ const harvestApiConfig = api.enhanceEndpoints({
 const harvestApi = harvestApiConfig.injectEndpoints({
   endpoints: (builder) => ({
     getAllHarvest: builder.query({
-      query: ({ farmId, params }) => `/farmer/${farmId}/harvest?page=${params}`,
+      query: ({ farmId, params }) => {
+        if (!farmId) {
+          return "";
+        }
+        return `/farmer/${farmId}/harvest?page=${params}`;
+      },
       providesTags: ["Harvest"],
     }),
     getHarvest: builder.query({
