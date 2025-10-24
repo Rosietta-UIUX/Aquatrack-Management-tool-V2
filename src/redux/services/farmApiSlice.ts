@@ -14,21 +14,16 @@ const farmApiConfig = api.enhanceEndpoints({ addTagTypes: ["Farms"] });
 const farmApi = farmApiConfig.injectEndpoints({
   endpoints: (builder) => ({
     getAllFarms: builder.query({
-      query: () => `/farmer/farms`,
+      query: () => `farmer/farms`,
       providesTags: ["Farms"],
     }),
     getFarmData: builder.query({
-      query: ({ farmId }) => {
-        if (!farmId) {
-          return "";
-        }
-        return `/farmer/${farmId}/dashboard`;
-      },
+      query: ({ farmId }) => `farmer/${farmId}/dashboard`,
       providesTags: ["Farms"],
     }),
     createFarm: builder.mutation<void, any>({
       query: ({ formdata }) => ({
-        url: `/farmer/farms`,
+        url: `farmer/farms`,
         method: `POST`,
         body: formdata,
       }),
@@ -36,7 +31,7 @@ const farmApi = farmApiConfig.injectEndpoints({
     }),
     editFarm: builder.mutation<void, any>({
       query: ({ formdata, farmId }) => ({
-        url: `/farmer/farms/${farmId}`,
+        url: `farmer/farms/${farmId}`,
         method: `PATCH`,
         body: formdata,
       }),
@@ -44,7 +39,7 @@ const farmApi = farmApiConfig.injectEndpoints({
     }),
     editOrganization: builder.mutation<void, any>({
       query: ({ formdata, orgId }) => ({
-        url: `/update-organization/${orgId}`,
+        url: `update-organization/${orgId}`,
         method: `PATCH`,
         body: formdata,
       }),
@@ -52,7 +47,7 @@ const farmApi = farmApiConfig.injectEndpoints({
     }),
     deleteFarm: builder.mutation<void, any>({
       query: ({ farmId }) => ({
-        url: `/farmer/farms/${farmId}`,
+        url: `farmer/farms/${farmId}`,
         method: `DELETE`,
       }),
       invalidatesTags: ["Farms"],

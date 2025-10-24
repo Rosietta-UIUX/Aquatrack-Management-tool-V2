@@ -5,12 +5,12 @@ const taskApiConfig = api.enhanceEndpoints({ addTagTypes: ["Tasks"] });
 const taskApi = taskApiConfig.injectEndpoints({
   endpoints: (builder) => ({
     getAllTaskData: builder.query({
-      query: ({ farmId }) => `/farmer/${farmId}/tasks`,
+      query: ({ farmId }) => `farmer/${farmId}/tasks`,
       providesTags: ["Tasks"],
     }),
     createTask: builder.mutation({
       query: ({ formdata, farmId }) => ({
-        url: `/farmer/${farmId}/task`,
+        url: `farmer/${farmId}/tasks`,
         method: `POST`,
         body: formdata,
       }),
@@ -18,7 +18,7 @@ const taskApi = taskApiConfig.injectEndpoints({
     }),
     editTask: builder.mutation({
       query: ({ formdata, farmId, taskId }) => ({
-        url: `/farmer/${farmId}/task/${taskId}`,
+        url: `farmer/${farmId}/tasks/${taskId}`,
         method: `PATCH`,
         body: formdata,
       }),

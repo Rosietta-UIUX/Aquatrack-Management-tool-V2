@@ -7,16 +7,16 @@ const inventoryApiConfig = api.enhanceEndpoints({
 const inventoryApi = inventoryApiConfig.injectEndpoints({
   endpoints: (builder) => ({
     getInventory: builder.query({
-      query: ({ farmId }) => `/farmer/${farmId}/harvest`,
+      query: ({ farmId }) => `farmer/${farmId}/harvest`,
       providesTags: ["Inventory"],
     }),
     // getHarvestStat: builder.query({
-    //   query: ({ farmId }) => `/farmer/batchs/${farmId}/farm-statistics`,
+    //   query: ({ farmId }) => `farmer/batchs/${farmId}/farm-statistics`,
     //   providesTags: ["Harvest"],
     // }),
     // createPurchase: builder.mutation({
     //   query: ({ formdata, farmId }) => ({
-    //     url: `/farmer/${farmId}/harvest`,
+    //     url: `farmer/${farmId}/harvest`,
     //     method: `POST`,
     //     body: formdata,
     //   }),
@@ -24,7 +24,7 @@ const inventoryApi = inventoryApiConfig.injectEndpoints({
     // }),
     editHarvest: builder.mutation({
       query: ({ formdata, farmId, taskId }) => ({
-        url: `/farmer/${farmId}/harvest/${taskId}`,
+        url: `farmer/${farmId}/harvest/${taskId}`,
         method: `PATCH`,
         body: formdata,
       }),
@@ -32,7 +32,7 @@ const inventoryApi = inventoryApiConfig.injectEndpoints({
     }),
     deleteHarvest: builder.mutation({
       query: ({ farmId, batchId }) => ({
-        url: `/farmer/${farmId}/harvest/${batchId}`,
+        url: `farmer/${farmId}/harvest/${batchId}`,
         method: `DELETE`,
       }),
       invalidatesTags: ["Inventory"],

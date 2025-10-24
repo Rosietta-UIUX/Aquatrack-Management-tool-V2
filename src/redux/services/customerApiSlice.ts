@@ -7,26 +7,22 @@ const customerApiConfig = api.enhanceEndpoints({
 const customerApi = customerApiConfig.injectEndpoints({
   endpoints: (builder) => ({
     getCustomers: builder.query({
-      query: ({ farmId, harvestId, params }) => {
-        if (!farmId || !harvestId) {
-          return "";
-        }
-        return `/farmer/${farmId}/harvest/${harvestId}/customer?page=${params}`;
-      },
+      query: ({ farmId, harvestId, params }) =>
+        `farmer/${farmId}/harvest/${harvestId}/customer?page=${params}`,
       providesTags: ["Customer"],
       keepUnusedDataFor: 30,
     }),
     getAllCustomers: builder.query({
-      query: ({ farmId }) => `/farmer/${farmId}/customers`,
+      query: ({ farmId }) => `farmer/${farmId}/customers`,
       providesTags: ["Customer"],
     }),
     downloadSheet: builder.query({
-      query: ({ farmId }) => `/farmer/${farmId}/customers?export=csv`,
+      query: ({ farmId }) => `farmer/${farmId}/customers?export=csv`,
       providesTags: ["Customer"],
     }),
     createCustomer: builder.mutation({
       query: ({ formdata, farmId, harvestId }) => ({
-        url: `/farmer/${farmId}/harvest/${harvestId}/customer`,
+        url: `farmer/${farmId}/harvest/${harvestId}/customer`,
         method: `POST`,
         body: formdata,
       }),
@@ -34,7 +30,7 @@ const customerApi = customerApiConfig.injectEndpoints({
     }),
     createPurchase: builder.mutation({
       query: ({ formdata, farmId, harvestId }) => ({
-        url: `/farmer/${farmId}/harvest/${harvestId}/purchase`,
+        url: `farmer/${farmId}/harvest/${harvestId}/purchase`,
         method: `POST`,
         body: formdata,
       }),
@@ -42,7 +38,7 @@ const customerApi = customerApiConfig.injectEndpoints({
     }),
     editPurchase: builder.mutation({
       query: ({ formdata, farmId, harvestId }) => ({
-        url: `/farmer/${farmId}/harvest/${harvestId}/purchase`,
+        url: `farmer/${farmId}/harvest/${harvestId}/purchase`,
         method: `PATCH`,
         body: formdata,
       }),
@@ -50,7 +46,7 @@ const customerApi = customerApiConfig.injectEndpoints({
     }),
     editPendingPurchase: builder.mutation({
       query: ({ formdata, purchaseId }) => ({
-        url: `/farmer/purchase/${purchaseId}`,
+        url: `farmer/purchase/${purchaseId}`,
         method: `PATCH`,
         body: formdata,
       }),
@@ -58,7 +54,7 @@ const customerApi = customerApiConfig.injectEndpoints({
     }),
     deletePurchase: builder.mutation({
       query: ({ formdata, purchaseId }) => ({
-        url: `/farmer/purchase/${purchaseId}`,
+        url: `farmer/purchase/${purchaseId}`,
         method: `DELETE`,
         body: formdata,
       }),
@@ -66,7 +62,7 @@ const customerApi = customerApiConfig.injectEndpoints({
     }),
     editCustomer: builder.mutation({
       query: ({ formdata, farmId, harvestId, customerId }) => ({
-        url: `/farmer/${farmId}/harvest/${harvestId}/customer/${customerId}`,
+        url: `farmer/${farmId}/harvest/${harvestId}/customer/${customerId}`,
         method: `PATCH`,
         body: formdata,
       }),
@@ -74,14 +70,14 @@ const customerApi = customerApiConfig.injectEndpoints({
     }),
     deleteCustomer: builder.mutation({
       query: ({ farmId, batchId }) => ({
-        url: `/farmer/${farmId}/customer/${batchId}`,
+        url: `farmer/${farmId}/customer/${batchId}`,
         method: `DELETE`,
       }),
       invalidatesTags: ["Customer"],
     }),
     deleteAllCustomer: builder.mutation({
       query: ({ formdata }) => ({
-        url: `/farmer/delete-all`,
+        url: `farmer/delete-all`,
         method: `POST`,
         body: formdata,
       }),
@@ -89,7 +85,7 @@ const customerApi = customerApiConfig.injectEndpoints({
     }),
     AddBeneficiary: builder.mutation({
       query: ({ formdata, farmId }) => ({
-        url: `/farmer/${farmId}/beneficiary`,
+        url: `farmer/${farmId}/beneficiary`,
         method: `POST`,
         body: formdata,
       }),

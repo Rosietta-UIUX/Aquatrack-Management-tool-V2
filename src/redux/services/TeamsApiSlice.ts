@@ -5,7 +5,7 @@ const teamApiConfig = api.enhanceEndpoints({ addTagTypes: ["Teams"] });
 const teamApi = teamApiConfig.injectEndpoints({
   endpoints: (builder) => ({
     getTeams: builder.query({
-      query: () => `/farmer/list-team-members`,
+      query: () => `farmer/list-team-members`,
       providesTags: ["Teams"],
       keepUnusedDataFor: 5,
     }),

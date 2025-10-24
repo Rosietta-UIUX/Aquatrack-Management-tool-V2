@@ -12,16 +12,9 @@ const subApi = subApiConfig.injectEndpoints({
       providesTags: ["Sub"],
     }),
     getSubscriptionStatus: builder.query({
-      query: ({ farmId }) => {
-        if (!farmId) {
-          return {
-            url: "",
-          };
-        }
-        return {
-          url: `/farmer/${farmId}/check-subscription-status`,
-        };
-      },
+      query: ({ farmId }) => ({
+        url: `/farmer/${farmId}/check-subscription-status`,
+      }),
       keepUnusedDataFor: 5,
       providesTags: ["Sub"],
     }),

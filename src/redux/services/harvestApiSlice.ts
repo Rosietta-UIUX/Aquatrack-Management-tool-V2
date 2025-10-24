@@ -7,27 +7,17 @@ const harvestApiConfig = api.enhanceEndpoints({
 const harvestApi = harvestApiConfig.injectEndpoints({
   endpoints: (builder) => ({
     getAllHarvest: builder.query({
-      query: ({ farmId, params }) => {
-        if (!farmId) {
-          return "";
-        }
-        return `/farmer/${farmId}/harvest?page=${params}`;
-      },
+      query: ({ farmId, params }) => `farmer/${farmId}/harvest?page=${params}`,
       providesTags: ["Harvest"],
     }),
     getHarvest: builder.query({
-      query: ({ farmId, harvestId }) => {
-        if (!farmId || !harvestId) {
-          // Return an empty query to prevent the API call
-          return "";
-        }
-        return `/farmer/${farmId}/harvest/${harvestId}`;
-      },
+      query: ({ farmId, harvestId }) =>
+        `farmer/${farmId}/harvest/${harvestId}`,
       providesTags: ["Harvest"],
     }),
     createHarvest: builder.mutation({
       query: ({ formdata, farmId }) => ({
-        url: `/farmer/${farmId}/harvest`,
+        url: `farmer/${farmId}/harvest`,
         method: `POST`,
         body: formdata,
       }),
@@ -36,7 +26,7 @@ const harvestApi = harvestApiConfig.injectEndpoints({
 
     editHarvest: builder.mutation({
       query: ({ formdata, farmId, taskId }) => ({
-        url: `/farmer/${farmId}/harvest/${taskId}`,
+        url: `farmer/${farmId}/harvest/${taskId}`,
         method: `PATCH`,
         body: formdata,
       }),
@@ -45,7 +35,7 @@ const harvestApi = harvestApiConfig.injectEndpoints({
 
     editHarvestCus: builder.mutation({
       query: ({ formdata, farmId, harvestId }) => ({
-        url: `/farmer/${farmId}/harvest/${harvestId}`,
+        url: `farmer/${farmId}/harvest/${harvestId}`,
         method: `PATCH`,
         body: formdata,
       }),
@@ -54,14 +44,14 @@ const harvestApi = harvestApiConfig.injectEndpoints({
 
     deleteHarvest: builder.mutation({
       query: ({ farmId, batchId }) => ({
-        url: `/farmer/${farmId}/harvest/${batchId}`,
+        url: `farmer/${farmId}/harvest/${batchId}`,
         method: `DELETE`,
       }),
       invalidatesTags: ["Harvest"],
     }),
     deleteAllHarvest: builder.mutation({
       query: ({ formdata }) => ({
-        url: `/farmer/delete-all`,
+        url: `farmer/delete-all`,
         method: `POST`,
         body: formdata,
       }),

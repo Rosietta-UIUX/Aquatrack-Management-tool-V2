@@ -7,16 +7,16 @@ const pondApiConfig = api.enhanceEndpoints({
 const pondApi = pondApiConfig.injectEndpoints({
   endpoints: (builder) => ({
     getAllPondsData: builder.query({
-      query: ({ farmId }) => `/farmer/${farmId}/pond`,
+      query: ({ farmId }) => `farmer/${farmId}/pond`,
       providesTags: ["Ponds"],
     }),
     getAllPondsStat: builder.query({
-      query: ({ farmId }) => `/farmer/ponds/${farmId}/farm-statistics`,
+      query: ({ farmId }) => `farmer/ponds/${farmId}/farm-statistics`,
       providesTags: ["Ponds"],
     }),
     createPond: builder.mutation({
       query: ({ formdata, farmId }) => ({
-        url: `/farmer/${farmId}/pond`,
+        url: `farmer/${farmId}/pond`,
         method: `POST`,
         body: formdata,
       }),
@@ -24,7 +24,7 @@ const pondApi = pondApiConfig.injectEndpoints({
     }),
     editPond: builder.mutation({
       query: ({ formdata, farmId, pondId }) => ({
-        url: `/farmer/${farmId}/pond/${pondId}`,
+        url: `farmer/${farmId}/pond/${pondId}`,
         method: `PATCH`,
         body: formdata,
       }),
@@ -32,19 +32,19 @@ const pondApi = pondApiConfig.injectEndpoints({
     }),
     deletePond: builder.mutation({
       query: ({ farmId, pondId }) => ({
-        url: `/farmer/${farmId}/pond/${pondId}`,
+        url: `farmer/${farmId}/pond/${pondId}`,
         method: `DELETE`,
       }),
       invalidatesTags: ["Ponds"],
     }),
     getMortalityLogs: builder.query({
       query: ({ farmId, pondId }) =>
-        `/farmer/${farmId}/pond/${pondId}/mortality-logs`,
+        `farmer/${farmId}/pond/${pondId}/mortality-logs`,
       providesTags: ["MortalityLogs"],
     }),
     getAllLogs: builder.query({
       query: ({ farmId, startDate, endDate }) => {
-        let url = `/farmer/${farmId}/all-logs`;
+        let url = `farmer/${farmId}/all-logs`;
         if (startDate && endDate) {
           url += `?start_date=${startDate}&end_date=${endDate}`;
         }
@@ -54,7 +54,7 @@ const pondApi = pondApiConfig.injectEndpoints({
     }),
     getDailyReport: builder.query({
       query: ({ farmId, startDate, endDate }) => {
-        let url = `/farmer/${farmId}/daily-report`;
+        let url = `farmer/${farmId}/daily-report`;
         if (startDate && endDate) {
           url += `?start_date=${startDate}&end_date=${endDate}`;
         }
@@ -64,7 +64,7 @@ const pondApi = pondApiConfig.injectEndpoints({
     }),
     getDailySummary: builder.query({
       query: ({ farmId, date }) => {
-        let url = `/farmer/${farmId}/daily-summary`;
+        let url = `farmer/${farmId}/daily-summary`;
         if (date) {
           url += `?date=${date}`;
         }
@@ -74,7 +74,7 @@ const pondApi = pondApiConfig.injectEndpoints({
     }),
     addMortalityLog: builder.mutation({
       query: ({ formdata, farmId, pondId }) => ({
-        url: `/farmer/${farmId}/pond/${pondId}/mortality-logs`,
+        url: `farmer/${farmId}/pond/${pondId}/mortality-logs`,
         method: "POST",
         body: formdata,
       }),
@@ -82,7 +82,7 @@ const pondApi = pondApiConfig.injectEndpoints({
     }),
     editMortalityLog: builder.mutation({
       query: ({ formdata, farmId, pondId, logId }) => ({
-        url: `/farmer/${farmId}/pond/${pondId}/mortality-logs/${logId}`,
+        url: `farmer/${farmId}/pond/${pondId}/mortality-logs/${logId}`,
         method: "PATCH",
         body: formdata,
       }),
@@ -90,14 +90,14 @@ const pondApi = pondApiConfig.injectEndpoints({
     }),
     deleteMortalityLog: builder.mutation({
       query: ({ farmId, pondId, logId }) => ({
-        url: `/farmer/${farmId}/pond/${pondId}/mortality-logs/${logId}`,
+        url: `farmer/${farmId}/pond/${pondId}/mortality-logs/${logId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["MortalityLogs", "Ponds", "DailyReport", "AllLogs"],
     }),
     addFeedLog: builder.mutation({
       query: ({ formdata, farmId, pondId }) => ({
-        url: `/farmer/${farmId}/pond/${pondId}/feed-logs`,
+        url: `farmer/${farmId}/pond/${pondId}/feed-logs`,
         method: "POST",
         body: formdata,
       }),
@@ -105,7 +105,7 @@ const pondApi = pondApiConfig.injectEndpoints({
     }),
     editFeedLog: builder.mutation({
       query: ({ formdata, farmId, pondId, logId }) => ({
-        url: `/farmer/${farmId}/pond/${pondId}/feed-logs/${logId}`,
+        url: `farmer/${farmId}/pond/${pondId}/feed-logs/${logId}`,
         method: "PATCH",
         body: formdata,
       }),
@@ -113,7 +113,7 @@ const pondApi = pondApiConfig.injectEndpoints({
     }),
     deleteFeedLog: builder.mutation({
       query: ({ farmId, pondId, logId }) => ({
-        url: `/farmer/${farmId}/pond/${pondId}/feed-logs/${logId}`,
+        url: `farmer/${farmId}/pond/${pondId}/feed-logs/${logId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["FeedLogs", "Ponds", "DailyReport", "AllLogs"],

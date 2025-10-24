@@ -55,10 +55,15 @@ const HarvestSinglePage = ({ params }: any) => {
   const [csvData, setCsvData] = useState("");
   const { data } = useGetCurrentUserQuery(null);
   const { defaultFarmId } = useDefaultFarmId();
-  const { data: harvestData } = useGetHarvestQuery({
-    farmId: defaultFarmId,
-    harvestId: params?.id,
-  });
+  const { data: harvestData } = useGetHarvestQuery(
+    {
+      farmId: defaultFarmId,
+      harvestId: params?.id,
+    },
+    {
+      skip: !defaultFarmId || !params?.id,
+    }
+  );
 
   const [selectAll, setSelectAll] = useState(false);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
@@ -90,11 +95,16 @@ const HarvestSinglePage = ({ params }: any) => {
   };
 
   // console.log()
-  const { data: customerData } = useGetCustomersQuery({
-    farmId: defaultFarmId,
-    harvestId: params?.id,
-    params: currentPage,
-  });
+  const { data: customerData } = useGetCustomersQuery(
+    {
+      farmId: defaultFarmId,
+      harvestId: params?.id,
+      params: currentPage,
+    },
+    {
+      skip: !defaultFarmId || !params?.id,
+    }
+  );
   const [open, setOpen] = useState(false);
   const [openBeneficary, setOpenBeneficary] = useState(false);
 
@@ -111,9 +121,6 @@ const HarvestSinglePage = ({ params }: any) => {
   }, [harvestData]);
 
   const handleDownloadSheet = async () => {
-    if (!defaultFarmId || !params?.id) {
-      return;
-    }
     try {
       const token = await fetchToken();
       const headers = {
