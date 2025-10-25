@@ -180,6 +180,13 @@ const NavHeader = () => {
                       Community
                     </label>
                     <DropdownMenuSeparator />
+                    <Link href="/loans/overview">
+                      <label className="flex items-center text-sm font-medium cursor-pointer ">
+                        <FaArrowAltCircleUp className="text-gray-500 h-4 w-4 mr-2 " />
+                        Loans
+                      </label>
+                    </Link>
+                    <DropdownMenuSeparator />
                     <label>
                       <Button
                         onClick={() => setOpenLog(true)}
