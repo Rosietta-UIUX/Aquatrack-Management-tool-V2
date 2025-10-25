@@ -113,6 +113,10 @@
   color: white !important;
 }
 
+.text-default {
+  color: var(--foreground);
+}
+
 
 
 

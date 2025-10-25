@@ -15,31 +15,34 @@ const LoanDashboardLayout = ({ children }: { children: React.ReactNode }) => {
   ];
 
   return (
-    <div className="container mx-auto p-8">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-[--primary]">Loan Details</h1>
-        <Link href="/dashboard">
-          <Button variant="outline">Back to Farms</Button>
-        </Link>
-      </div>
-
-      <div className="flex border-b">
-        {tabs.map((tab) => (
-          <Link key={tab.name} href={tab.href}>
-            <div
-              className={`py-2 px-4 text-lg font-medium cursor-pointer ${
-                pathname === tab.href
-                  ? "border-b-2 border-[--primary] text-[--primary]"
-                  : "text-gray-500 hover:text-gray-700"
-              }`}
-            >
-              {tab.name}
-            </div>
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto p-8">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-bold text-[--primary]">Loan Details</h1>
+          <Link href="/">
+            <Button className="bg-[--primary] text-white hover:bg-[--primary-dark]">Back to Farms</Button>
           </Link>
-        ))}
-      </div>
+        </div>
 
-      <div className="mt-8">{children}</div>
+        <div className="bg-white rounded-lg shadow-md">
+          <div className="flex border-b">
+            {tabs.map((tab) => (
+              <Link key={tab.name} href={tab.href}>
+                <div
+                  className={`py-3 px-6 text-lg font-medium cursor-pointer transition-colors duration-300 ${
+                    pathname === tab.href
+                      ? "border-b-4 border-[--primary] text-[--primary]"
+                      : "text-gray-600 hover:text-[--primary]"
+                  }`}
+                >
+                  {tab.name}
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="p-8">{children}</div>
+        </div>
+      </div>
     </div>
   );
 };
