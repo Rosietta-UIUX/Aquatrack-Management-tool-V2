@@ -148,10 +148,12 @@ const LoanApplicationPage = () => {
         </form>
       </div>
       <SuccessModal
-        isOpen={isModalOpen}
-        onClose={handleModalClose}
+        open={isModalOpen}
+        setOpen={setIsModalOpen}
         title="Application Submitted!"
-        message="Your loan application has been submitted successfully."
+        text="Your loan application has been submitted successfully."
+        link="/loans/status"
+        btnText="Close"
       />
     </div>
   );

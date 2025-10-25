@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 const LoanStatusPage = () => {
   // In a real application, this would come from an API
-  const loanStatus = "Pending"; // Possible values: Pending, Approved, Rejected
+  type LoanStatus = "Pending" | "Approved" | "Rejected";
+  const [loanStatus, setLoanStatus] = useState<LoanStatus>("Pending");
 
   const getStatusColor = () => {
     switch (loanStatus) {
@@ -13,6 +15,7 @@ const LoanStatusPage = () => {
         return "text-green-500";
       case "Rejected":
         return "text-red-500";
+      case "Pending":
       default:
         return "text-yellow-500";
     }

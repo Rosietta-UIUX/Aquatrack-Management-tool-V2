@@ -1,6 +1,8 @@
 import { verifyPaystackTransaction } from "@/app/actions/action";
 import Image from "next/image";
 import React from "react";
+
+export const dynamic = 'force-dynamic'
 import paymentImg from "@/public/successful-lfa4DD13LW.png";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
