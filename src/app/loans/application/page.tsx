@@ -19,7 +19,17 @@ const LoanApplicationPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
-  const [formData, setFormData] = useState({
+  interface FormData {
+    firstName: string;
+    middleName: string;
+    surname: string;
+    bankStatement: File | null;
+    amountRequested: string;
+    loanDuration: string;
+    reasonForLoan: string;
+  }
+
+  const [formData, setFormData] = useState<FormData>({
     firstName: "",
     middleName: "",
     surname: "",
