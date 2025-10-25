@@ -35,6 +35,13 @@ const LoanStatusPage = () => {
         <p className="mt-4 text-gray-600">
           We are currently reviewing your application. You will be notified once there is an update.
         </p>
+
+        {/* Temporary button for testing the post-approval flow */}
+        <div className="mt-8">
+          <Link href="/loans/dashboard">
+            <Button>Simulate Approval (Temporary)</Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

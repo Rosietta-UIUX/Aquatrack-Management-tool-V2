@@ -45,8 +45,8 @@ const LoanApplicationPage = () => {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFormData((prev) => ({ ...prev, bankStatement: e.target.files[0] }));
+    if (e.target.files && e.target.files.length > 0) {
+      setFormData((prev) => ({ ...prev, bankStatement: e.target.files![0] }));
     }
   };
 
